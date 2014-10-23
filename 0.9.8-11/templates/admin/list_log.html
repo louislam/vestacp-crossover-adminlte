@@ -1,0 +1,58 @@
+            <table class="submenu">
+                <tr>
+                    <td class="wrapper">
+                        <div class="submenu-search-block">
+                            <form action="/search/" method="get">
+                            <input type="text" name="q" class="submenu-search-field">
+                            <input type="submit" value="<?php print __('Search');?>" class="submenu-button-search">
+                            </form>
+                        </div>
+                        <?php display_error_block(); ?> 
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="vstobjects">
+            <table class='data'>
+
+                <?php
+                    foreach ($data as $key => $value) {
+                        ++$i;
+                ?>
+
+                <tr class="data-row">
+                    <td class="data-dotted">
+                        <table class="data-col1">
+                            <tr><td><a class="data-date" title="<?php echo $data[$key]['DATE']."  ".$data[$key]['TIME'] ?>"><?php echo  strftime("%d %b %Y", strtotime($data[$key]['DATE']))?></a></td></tr>
+                            <tr><td><a class="data-date" title="<?php echo $data[$key]['DATE']."  ".$data[$key]['TIME'] ?>"><?php echo $data[$key]['TIME']?></a></td></tr>
+                        </table>
+                    </td>
+                    <td class="data-dotted">
+                        <div style="height:20px; width:20px;"></div>
+                    <table class="data-col5">
+                        <tr>
+                            <td class="domain" style="font-size: 14pt; font-weight:normal">
+                                <?php echo $data[$key]['CMD'] ?>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <?php
+                }
+            ?> 
+
+        </table>
+
+        <div class="data-count">
+            <?php
+                if ( $i == 1) {
+                    echo __('one log record');
+                } else {
+                    echo __('%s log records',$i);
+                }
+            ?>
+        </div>
+    </div>
