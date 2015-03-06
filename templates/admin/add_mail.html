@@ -1,0 +1,75 @@
+            <?php
+                $back = $_SESSION['back'];
+                if (empty($back)) {
+                    $back = "location.href='/list/mail/'";
+                } else {
+                    $back = "location.href='".$back."'";
+                }
+            ?>
+            <table class="submenu">
+                <tr>
+                    <td style="padding: 20px 10px;" ><a class="name"><b><?php print __('Adding Mail Domain');?></b></a>
+                        <?php
+                            if (!empty($_SESSION['error_msg'])) {
+                                echo "<span class=\"vst-error\"> → ".$_SESSION['error_msg']."</span>";
+                            } else {
+                                if (!empty($_SESSION['ok_msg'])) {
+                                    echo "<span class=\"vst-ok\"> → ".$_SESSION['ok_msg']."</span>";
+                                }
+                            }
+                        ?> 
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <form id="vstobjects" name="v_add_mail" method="post">
+            <table class="data mode-add">
+                <tr class="data-add">
+                    <td class="data-dotted">
+                        <table class="data-col1">
+                            <tr><td></td></tr>
+                        </table>
+                    </td>
+                    <td class="data-dotted">
+                        <table class="data-col2" width="600px">
+                            <tr>
+                                <td class="vst-text step-top">
+                                    <?php print __('Domain');?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" size="20" class="vst-input" name="v_domain" <?php if (!empty($v_domain)) echo "value=".$v_domain;  ?> >
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vst-text input-label">
+                                    <label><input type="checkbox" size="20" class="vst-checkbox" name="v_antispam" <?php if ((empty($v_antispam)) || ($v_antispam == 'yes')) echo "checked=yes"; ?>> <?php print __('AntiSpam Support');?></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vst-text input-label">
+                                    <label><input type="checkbox" size="20" class="vst-checkbox" name="v_antivirus" <?php if ((empty($v_antivirus)) || ($v_antivirus == 'yes')) echo "checked=yes"; ?>> <?php print __('AntiVirus Support');?></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vst-text input-label">
+                                    <label><input type="checkbox" size="20" class="vst-checkbox" name="v_dkim" <?php if (isset($v_dkim)&&$v_dkim == 'yes') echo "checked=yes"; ?>> <?php print __('DKIM Support');?></label>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="data-col2">
+                            <tr>
+                                <td class="step-top" width="116px">
+                                    <input type="submit" name="ok" value="<?php print __('Add');?>" class="button">
+                                </td>
+                                <td class="step-top">
+                                    <input type="button" class="button" value="<?php print __('Back');?>" onclick="<?php echo $back ?>">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
