@@ -1,5 +1,5 @@
 <!-- Content Wrapper. Contains page content -->
-<form action="/bulk/user/" method="post" id="objects">
+
 <div class="content-wrapper">
 	<?php include "content_header.php" ?>
 
@@ -37,81 +37,82 @@
 		</div>
 
 
-		<div class='box box-default'>
-			<div class='box-body'>
-				<div class="row">
 
-					<div class="col-md-9">
-						<?php if ($user == 'admin') : ?>
-							<a href="/add/user/" class="btn btn-primary"><?php echo __('Add User') ?></a>
-						<?php else: ?>
-							<a href="/add/web/" class="btn btn-primary"><?php echo __('Add Web Domain') ?></a>
-						<?php endif; ?>
-						<br /><br />
+		<div class="row">
 
-					</div>
-
-					<div class="col-md-3">
-						<form action="/search/" method="get">
-							<div class="input-group input-group-sm">
-								<input type="text" name="q" class="submenu-search-field form-control" />
-								<span class="input-group-btn">
-									<input type="submit" value="<?php print __('Search');?>" class="submenu-button-search btn btn-info btn-flat" />
-								</span>
-							</div>
-						</form>
-
-						<div class="submenu-select-block">
-
-								<a class="submenu-select-link" href='javascript:checkedAll("objects");'> <?php print __('toggle all');?> </a>
-								<select name="action" class="submenu-select-dropdown">
-									<option value=""><?php print __('apply to selected');?></option>
-									<option value="rebuild"><?php print __('rebuild');?></option>
-									<option value="rebuild web"><?php print __('rebuild web');?></option>
-									<option value="rebuild dns"><?php print __('rebuild dns');?></option>
-									<option value="rebuild mail"><?php print __('rebuild mail');?></option>
-									<option value="rebuild db"><?php print __('rebuild db');?></option>
-									<option value="rebuild cron"><?php print __('rebuild cron');?></option>
-									<option value="update counters"><?php print __('update counters');?></option>
-									<option value="suspend"><?php print __('suspend');?></option>
-									<option value="unsuspend"><?php print __('unsuspend');?></option>
-									<option value="delete"><?php print __('delete');?></option>
-								</select>
-								<input type="submit" name="ok" value="›" class="submenu-button-select" />
-
-						</div>
-					</div>
-
-				</div>
+			<div class="col-md-5">
+				<?php if ($user == 'admin') : ?>
+					<a href="/add/user/" class="btn btn-primary"><?php echo __('Add User') ?></a>
+				<?php else: ?>
+					<a href="/add/web/" class="btn btn-primary"><?php echo __('Add Web Domain') ?></a>
+				<?php endif; ?>
+				<br /><br />
 
 			</div>
+
+			<div class="col-md-4">
+
+				<a class="submenu-select-link btn btn-primary" href='javascript:checkedAll("objects");'> <?php print __('toggle all');?> </a>
+
+				<select name="action" class="submenu-select-dropdown apply-dropdown">
+					<option value=""><?php print __('apply to selected');?></option>
+					<option value="rebuild"><?php print __('rebuild');?></option>
+					<option value="rebuild web"><?php print __('rebuild web');?></option>
+					<option value="rebuild dns"><?php print __('rebuild dns');?></option>
+					<option value="rebuild mail"><?php print __('rebuild mail');?></option>
+					<option value="rebuild db"><?php print __('rebuild db');?></option>
+					<option value="rebuild cron"><?php print __('rebuild cron');?></option>
+					<option value="update counters"><?php print __('update counters');?></option>
+					<option value="suspend"><?php print __('suspend');?></option>
+					<option value="unsuspend"><?php print __('unsuspend');?></option>
+					<option value="delete"><?php print __('delete');?></option>
+				</select>
+				<input type="submit" name="ok" value="›" class="submenu-button-select btn btn-primary" />
+
+			</div>
+
+			<div class="col-md-3">
+				<form action="/search/" method="get">
+					<div class="input-group input-group-sm">
+						<input type="text" name="q" class="submenu-search-field form-control" />
+						<span class="input-group-btn">
+							<input type="submit" value="<?php print __('Search');?>" class="submenu-button-search btn btn-info btn-flat" />
+						</span>
+					</div>
+				</form>
+			</div>
+
 		</div>
+
+
 
 		<?php display_error_block(); ?>
 
 
+		<form action="/bulk/user/" method="post" id="objects">
 
+		<?php foreach ($data as $key => $value) : ?>
 
-		<?php
-			foreach ($data as $key => $value) {
-				++$i;
-				if ($data[$key]['SUSPENDED'] == 'yes') {
-					$status = 'suspended';
-					$spnd_action = 'unsuspend' ;
-					$spnd_confirmation = 'UNSUSPEND_USER_CONFIRMATION' ;
-				} else {
-					$status = 'active';
-					$spnd_action = 'suspend' ;
-					$spnd_confirmation = 'SUSPEND_USER_CONFIRMATION' ;
-				}
-		?>
+			<?php
+					++$i;
+					if ($data[$key]['SUSPENDED'] == 'yes') {
+						$status = 'suspended';
+						$spnd_action = 'unsuspend' ;
+						$spnd_confirmation = 'UNSUSPEND_USER_CONFIRMATION' ;
+					} else {
+						$status = 'active';
+						$spnd_action = 'suspend' ;
+						$spnd_confirmation = 'SUSPEND_USER_CONFIRMATION' ;
+					}
+			?>
+
 		<div class="box box-default">
 			<div class='box-body'>
 				<div class="row">
 					<div class="col-md-1">
 						<input type="checkbox" class="ch-toggle" name="user[]" value="<?php echo $key ?>" />
 					</div>
-					<div class="col-md-8">
+					<div class="col-md-11">
 
 						<table class="data-col2">
 							<tr>
@@ -218,119 +219,68 @@
 						</table>
 					</div>
 
-					<div class="col-md-3">
+				</div>
 
-						<a href="javascript: $('#delete-modal').modal('show');" class="btn btn-danger" ><i class="fa fa-close"></i> <?php print __('delete'); ?></a>
+				<div class="row actions">
+					<div class="col-md-1"></div>
+					<div class="col-md-11">
+						<a class="btn btn-danger"  href="javascript: $('#delete-modal').modal('show');"><!--<i class="fa fa-close"></i> --><?php print __('delete'); ?></a>
 
-						<div class="modal modal-danger" id="delete-modal">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-										<h4 class="modal-title"><?php print __('Confirmation');?></h4>
-									</div>
-									<div class="modal-body">
-										<p><?php print __('DELETE_USER_CONFIRMATION',$key);?></p>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
-										<button type="button" class="btn btn-outline" href="/delete/user/?user=<?php echo $key ?>"><?php echo __('Delete') ?></button>
-									</div>
-								</div>
-							</div>
-						</div>
+						<a class="btn btn-danger" href="javascript: $('#suspend-modal').modal('show');" ><!--<i class="fa fa-close"></i> --><?php echo __($spnd_action); ?></a>
 
-						<a href="javascript: $('#suspend-modal').modal('show');" class="btn btn-danger" ><i class="fa fa-close"></i> <?php echo __($spnd_action); ?></a>
+						<a class="btn btn-primary" href="/edit/user/?user=<?php echo $key; ?>"><?php print __('edit'); ?></a>
 
-						<div class="modal modal-danger" id="suspend-modal">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-										<h4 class="modal-title"><?php print __('Confirmation');?></h4>
-									</div>
-									<div class="modal-body">
-										<p><?php print __($spnd_confirmation,$key);?></p>
-									</div>
-									<div class="modal-footer">
-										<input type="hidden" name="<?php echo $spnd_action ?>_url" value="/<?php echo $spnd_action ?>/user/?user=<?php echo $key ?>" />
-										<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
-										<button type="button" class="btn btn-outline" href="/delete/user/?user=<?php echo $key ?>"><?php echo __('Delete') ?></button>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
+						<?php if ($key == $user) : ?>
+							<a class="btn btn-primary" href="/logout"><?php print __('logout'); ?></a>
+						<?php else : ?>
+							<a class="btn btn-primary" href="/login/?loginas=<?php echo $key; ?>"><?php print __('login as') . " " . $key; ?></a>
+						<?php endif; ?>
 					</div>
 				</div>
-
-				<tr class="data-row <? if($status == 'suspended') echo 'suspended';?>">
-
-					<td class="data-dotted">
-						<a id="delete_link_<?php echo $i ?>" class="data-controls do_delete">
-
-						</a>
-						<a id="<?php echo $spnd_action ?>_link_<?php echo $i ?>" class="data-controls do_<?php echo $spnd_action ?>">
-                            <span class="do_<?php echo $spnd_action ?>">
-                                <img src="/images/suspend.png" width="7px" height="8px">
-
-				    <input type="hidden" name="<?php echo $spnd_action ?>_url" value="/<?php echo $spnd_action ?>/user/?user=<?php echo $key ?>" />
-                                <div id="<?php echo $spnd_action ?>_dialog_<?php echo $i ?>" class="confirmation-text-suspention hidden" title="<?php print __('Confirmation');?>">
-					<p class="confirmation"></p>
-				</div>
-                            </span>
-						</a>
-						<a href="/edit/user/?user=<?php echo $key; ?>" class="data-controls">
-                            <span>
-                                <img src="/images/edit.png" width="8px" height="8px">
-				    <?php print __('edit'); ?>
-                            </span>
-						</a>
-						<?php
-					if ($key == $user) {
-					?>
-						<a href="/logout" class="data-controls">
-                            <span>
-                                <img src="/images/login-as.png" width="7px" height="8px">
-				    <?php print __('logout'); ?>
-				    <?php
-	                            if (!empty($_SESSION['look_alert'])) {
-		                            ?>
-				    <script type="text/javascript">
-					    $(function() {
-						    $( "#dialog:ui-dialog" ).dialog( "destroy" );
-						    $( "#dialog-message" ).dialog({
-							    modal: true,
-							    buttons: {
-								    Ok: function() {
-									    $( this ).dialog( "close" );
-								    },
-							    }
-						    });
-					    });
-				    </script>
-		                            <div id="dialog-message" title="<?php print __('Welcome') ?>">
-						    <p class="confirmation"><?php print __('LOGGED_IN_AS',$key);?></p>
-					    </div>
-				    <?php
-		                            unset($_SESSION['look_alert']);
-	                            }
-	                            } else {
-	                            ?>
-				    <a href="/login/?loginas=<?php echo $key; ?>" class="data-controls">
-                            <span>
-                                <img src="/images/login-as.png" width="7px" height="8px">
-				    <?php print __('login as') ." ".$key; ?>
-				    <?php
-	                            }
-	                            ?>
-                            </span>
-				    </a>
-
 			</div>
 		</div>
-		<?php } ?>
+
+		<?php endforeach; ?>
+
+		</form>
 	</section>
 </div>
-</form>
+
+<!-- Confirm Dialog for Delete -->
+<div class="modal modal-danger" id="delete-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title"><?php print __('Confirmation');?></h4>
+			</div>
+			<div class="modal-body">
+				<p><?php print __('DELETE_USER_CONFIRMATION',$key);?></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
+				<button type="button" class="btn btn-outline" href="/delete/user/?user=<?php echo $key ?>"><?php echo __('Delete') ?></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Confirm Dialog for Suspend -->
+<div class="modal modal-danger" id="suspend-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title"><?php print __('Confirmation');?></h4>
+			</div>
+			<div class="modal-body">
+				<p><?php print __($spnd_confirmation,$key);?></p>
+			</div>
+			<div class="modal-footer">
+				<input type="hidden" name="<?php echo $spnd_action ?>_url" value="/<?php echo $spnd_action ?>/user/?user=<?php echo $key ?>" />
+				<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
+				<button type="button" class="btn btn-outline" href="/delete/user/?user=<?php echo $key ?>"><?php echo __('Delete') ?></button>
+			</div>
+		</div>
+	</div>
+</div>
