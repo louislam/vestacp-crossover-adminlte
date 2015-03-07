@@ -7,9 +7,8 @@ Still work in progress, do not try it on any production server.
 Currrently target for the version of	0.9.8 Release:12.
 
 ## Installation
-1. Backup /usr/local/vesta/web/
-1. Copy and replace all directory/usr/local/vesta/web/
-
+1. Backup /usr/local/vesta/web/.
+1. Put all files into /usr/local/vesta/web/.
 
 ## Reference
 In case you forgot to backup the "web" directory, you can download it from the VestaCP official repo.
