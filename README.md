@@ -1,7 +1,11 @@
 # VestaCP x AdminLTE
 
 ## !!!Warning!!!
-Still work in progress, do not try it on any production server.
+
+Still work in progress, do not try it on any production server. Currently it is INCOMPLETE theme.
+
+## Progress
+2%
 
 ## Requirement
 Currrently target for the version of	0.9.8 Release:12.
