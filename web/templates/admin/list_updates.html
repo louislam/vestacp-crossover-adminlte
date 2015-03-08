@@ -1,127 +1,99 @@
+<form action="/bulk/vesta/" method="post" id="objects">
+<div class="content-wrapper">
+	<?php include "content_header.php" ?>
 
-            <table class="submenu">
-                <tr>
-                    <td class="wrapper">
-                        <div style="float:left; width: 160px;">&nbsp;</div>
-                        <div class="submenu-search-block">
-                            <form action="/search/" method="get">
-                            <input type="text" name="q" class="submenu-search-field">
-                            <input type="submit" value="<?php print __('Search');?>" class="submenu-button-search">
-                            </form>
-                        </div>
-                        <div class="submenu-button-block">
-                            <form action="/bulk/vesta/" method="post" id="objects">
-                            <a class="submenu-select-link" href='javascript:checkedAll("objects");'> <?php print __('toggle all');?> </a>
-                            <select class="submenu-select-dropdown" name="action">
-                                <option value=""><?php print __('apply to selected') ?></option>
-                                <option value="update"><?php print __('update') ?></option>
-                            </select>
-                            <input type="submit" name="ok" value="›" class="submenu-button-select">
-                        </div>
-                        <div class="submenu-select-block" style="margin: 0 0 0 21px;">
-                            <?php
-                                if($autoupdate == 'Enabled') {
-                            ?>
-                            <a class="submenu-select-link" href="/delete/cron/autoupdate/">[ <?php print __('disable autoupdate');?> ]</a>
-                            <?php
-                                } else {
-                            ?>
-                            <a class="submenu-select-link" href="/add/cron/autoupdate/">[ <?php print __('enable autoupdate');?> ]</a>
-                            <?php
-                                }
-                            ?>
-                        </div>
-                        <?php display_error_block(); ?> 
-                    </td>
-                </tr>
-            </table>
-        </div>
+	<!-- Main content -->
+	<section class="content">
 
-        <div id="vstobjects">
-            <table class='data'>
+		<div class="row">
+			<div class="col-md-12">
+				<?php if($autoupdate == 'Enabled') { ?>
+					<a class="btn btn-primary" href="/delete/cron/autoupdate/"><?php print __('disable autoupdate');?></a>
+				<?php } else { ?>
+					<a class="btn btn-primary" href="/add/cron/autoupdate/"><?php print __('enable autoupdate');?> </a>
+				<?php } ?>
+			</div>
 
-               <?php
-                    foreach ($data as $key => $value) {
-                        ++$i;
-                        if ($data[$key]['UPDATED'] == 'yes') {
-                            $status = 'active';
-                            $upd_status = __('updated');
-                        } else {
-                            $status = 'suspended';
-                            $upd_status = __('outdated');
-                        }
-                    ?>
+		</div>
+		<br />
+		<?php
+		foreach ($data as $key => $value) {
+			++$i;
+			if ($data[$key]['UPDATED'] == 'yes') {
+				$status = 'active';
+				$upd_status = __('updated');
+			} else {
+				$status = 'suspended';
+				$upd_status = __('outdated');
+			}
+		?>
+		<div class="row">
 
-                <tr class="data-row">
-                    <td class="data-dotted">
-                        <table class="data-col1">
-                            <tr><td style="padding: 18 0 6 18;"><input type="checkbox" class="ch-toggle" name="pkg[]" value="<?php echo $key ?>" ></td></tr>
-                            <tr><td class="data-<?php echo $status ?>"><b><?php echo $upd_status ?></b></td></tr>
-                        </table>
-                    </td>
-                    <td class="data-dotted">
-                        <?php
-                            if ($data[$key]['UPDATED'] == 'no') {
-                        ?> 
-                        <a href="/update/vesta/?pkg=<?php echo $key ?>" class="data-controls">
-                            <span>
-                                <img src="/images/update.png" width="6px" height="7px">
-                                <?php print __('update') ?>
-                            </span>
-                        </a>
-                        <?php
-                            }
-                        ?> 
-                        <div style="height:20px;"></div>
+			<div class="col-md-10">
+				<div class="box box-info">
+					<div class="box-header">
+						<h2 class="box-title">[<?php echo $upd_status ?>] <?php echo $key ?></h2>
+					</div>
+					<div class="box-body">
+						<table class="data-col2">
+								<tr>
+									<td colspan=4 class="domain">
+										<b></b>
+									</td>
+								</tr>
+								<tr>
+									<td style="vertical-align:top;" width="239px">
+										<table>
+											<tr>
+												<td class="counter-name" style="padding: 2px 0 0 0">
+													<?php echo __($data[$key]['DESCR']) ?>
+												</td>
+											</tr>
+										</table>
+									</td>
+									<td style="vertical-align:top;" width="238px">
+										<table>
+											<tr>
+												<td class="counter-name">
+													<?php print __('Version') ?>:
+												</td>
+												<td class="counter-value">
+													<?php echo $data[$key]['VERSION'] ?> (<?php echo $data[$key]['ARCH'] ?>)
+												</td>
+											</tr>
+										</table>
+									</td>
+									<td style="vertical-align:top;">
+										<table>
+											<tr>
+												<td class="counter-name">
+													<?php print __('Release') ?>:
+												</td>
+												<td class="counter-value">
+													<?php echo $data[$key]['RELEASE'] ?>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+					</div>
 
-                        <table class="data-col2">
-                            <tr>
-                                <td colspan=4 class="domain">
-                                    <b><?php echo $key ?></b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align:top;" width="239px">
-                                    <table>
-                                        <tr>
-                                            <td class="counter-name" style="padding: 2px 0 0 0">
-                                                <?php echo __($data[$key]['DESCR']) ?> 
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td style="vertical-align:top;" width="238px">
-                                    <table>
-                                        <tr>
-                                            <td class="counter-name">
-                                                <?php print __('Version') ?>:
-                                            </td>
-                                            <td class="counter-value">
-                                                <?php echo $data[$key]['VERSION'] ?> (<?php echo $data[$key]['ARCH'] ?>)
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td style="vertical-align:top;">
-                                    <table>
-                                        <tr>
-                                            <td class="counter-name">
-                                                <?php print __('Release') ?>:
-                                            </td>
-                                            <td class="counter-value">
-                                                <?php echo $data[$key]['RELEASE'] ?> 
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+					<div class="box-footer">
+						<?php if ($data[$key]['UPDATED'] == 'no') { ?>
+							<a href="/update/vesta/?pkg=<?php echo $key ?>" class="data-controls btn btn-default">
+				                            <span>
+				                                <img src="/images/update.png" width="6px" height="7px">
+					                            <?php print __('update') ?>
+				                            </span>
+							</a>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php } ?>
+	</section>
+</div>
+</form>
 
-                <?php
-                    }
-                ?> 
-            </table>
-            </form>
-        </div>
