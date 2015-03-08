@@ -1,143 +1,183 @@
-            <table class="submenu">
-                <tr>
-                    <td class="wrapper">
-                        <div style="float:left; width: 160px;">&nbsp;</div>
-                        <div class="submenu-search-block">
-                            <form action="/search/" method="get">
-                            <input type="text" name="q" class="submenu-search-field">
-                            <input type="submit" value="<?php print __('Search');?>" class="submenu-button-search">
-                            </form>
-                        </div>
-                        <div class="submenu-button-block">
-                            <form action="/bulk/service/" method="post" id="objects">
-                            <a class="submenu-select-link" href='javascript:checkedAll("objects");'> <?php print __('toggle all');?> </a>
-                            <select class="submenu-select-dropdown" name="action">
-                                <option value=""><?php print __('apply to selected');?></option>
-                                <option value="stop"><?php print __('stop');?></option>
-                                <option value="start"><?php print __('start');?></option>
-                                <option value="restart"><?php print __('restart');?></option>
-                            </select>
-                            <input type="submit" name="ok" value="›" class="submenu-button-select">
-                        </div>
-                        <?php display_error_block(); ?> 
-                    </td>
-                </tr>
-            </table>
-        </div>
+<div class="content-wrapper">
+	<?php include "content_header.php" ?>
 
-        <div id="vstobjects">
-            <table class='data'>
-                <tr class="data-row">
-                    <td class="data-dotted">
-                        <table class="data-col1">
-                            <tr><td><input type="checkbox" class="ch-toggle" name="system[]" value="<?php echo $sys['sysinfo']['HOSTNAME'] ?>" ></td></tr>
-                            <tr><td class="data-active"><b><?php print __('running') ?></b></td></tr>
-                        </table>
-                    </td>
-                    <td class="data-dotted">
-                        <a id="delete_link_<?php echo $i ?>" class="data-controls do_delete">
-                            <span class="do_delete">
-                                <img src="/images/reload.png" width="6px" height="7px">
-                                 <?php print __('restart');?> 
-                                <input type="hidden" name="delete_url" value="/restart/system/?hostname=<?php echo $sys['sysinfo']['HOSTNAME']?>" />
-                                <div id="delete_dialog_<?php echo $i ?>" class="confirmation-text-delete hidden" title="<?php print __('Confirmation');?>">
-                                    <p class="confirmation"><?php print __('RESTART_CONFIRMATION',$sys['sysinfo']['HOSTNAME']);?></p>
-                                </div>
-                            </span>
-                        </a>
-                        <table class="data-col2">
-                            <tr>
-                                <td colspan=4 class="domain hostname"">
-                                    <b><?php echo $sys['sysinfo']['HOSTNAME'] ?></b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align:top;" width="240px">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <a class="counter-name">
-                                                    <?php echo $sys['sysinfo']['OS'] ?>
-                                                    <?php echo $sys['sysinfo']['VERSION'] ?>
-                                                     (<?php echo $sys['sysinfo']['ARCH'] ?>)
-                                                </a>
-                                            </td>
+	<!-- Main content -->
+	<section class="content">
 
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td style="vertical-align:top;" width="290px">
-                                    <table>
-                                        <tr>
-                                            <td class="counter-name">
-                                                <?php print __('LoadAverage');?>:
-                                            </td>
-                                            <td class="counter-value">
-                                                <?php echo $sys['sysinfo']['LOADAVERAGE'] ?> 
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td style="vertical-align:top;">
-                                    <table>
-                                        <tr>
-                                            <td class="counter-name">
-                                                <?php print __('Uptime');?>:
-                                            </td>
-                                            <td class="counter-value">
-                                                <?php echo humanize_time($sys['sysinfo']['UPTIME']) ?> 
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+		<div class="row">
+
+			<div class="col-md-4 col-sm-6 col-xs-12">
+				<div class="info-box">
+					<span class="info-box-icon bg-aqua"><i class="fa fa-info"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text"><?php print __('OS');?></span>
+						<span class="info-box-number">
+						<?php echo $sys['sysinfo']['OS'] ?>
+							<?php echo $sys['sysinfo']['VERSION'] ?>
+							(<?php echo $sys['sysinfo']['ARCH'] ?>)
+						</span>
+					</div><!-- /.info-box-content -->
+				</div><!-- /.info-box -->
+
+			</div>
 
 
 
-               <?php
-                    foreach ($data as $key => $value) {
-                        ++$i;
-                        if ($data[$key]['STATE'] == 'running') {
-                            $status = 'active';
-                            $action = 'stop';
-                        } else {
-                            $status = 'suspended';
-                            $action = 'start';
-                        }
+			<div class="col-md-4 col-sm-6 col-xs-12">
+				<div class="info-box">
+					<span class="info-box-icon bg-aqua"><i class="fa fa-info"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text"><?php print __('Uptime');?></span>
+						<span class="info-box-number"><?php echo humanize_time($sys['sysinfo']['UPTIME']) ?> (<?php print __('running') ?>) </span>
+					</div><!-- /.info-box-content -->
+				</div><!-- /.info-box -->
 
-                        $cpu = $data[$key]['CPU'] / 10;
-                        $cpu = number_format($cpu, 1);
-                        if ($cpu == '0.0')  $cpu = 0;
-                    ?>
+			</div>
 
-                <tr class="data-row <?=$status?>">
-                    <td class="data-dotted">
-                        <table class="data-col1">
-                            <tr><td><input type="checkbox" class="ch-toggle" name="service[]" value="<?php echo $key ?>" ></td></tr>
-                            <tr><td class="data-<?php echo $status ?>"><b><?php echo __($data[$key]['STATE']); ?></b></td></tr>
-                        </table>
-                    </td>
+			<div class="col-md-4 col-sm-6 col-xs-12">
+				<div class="info-box">
+					<span class="info-box-icon bg-aqua"><i class="fa fa-info"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text"><?php print __('LoadAverage');?></span>
+						<span class="info-box-number">
+							<?php echo $sys['sysinfo']['LOADAVERAGE'] ?>
+						</span>
+					</div><!-- /.info-box-content -->
+				</div><!-- /.info-box -->
+
+			</div>
+
+			<div class="col-md-8  col-sm-12 col-xs-12">
+				<div class="info-box">
+					<span class="info-box-icon bg-aqua"><i class="fa fa-info"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">Hostname</span>
+						<span class="info-box-number">
+								<?php echo $sys['sysinfo']['HOSTNAME'] ?>
+						</span>
+					</div><!-- /.info-box-content -->
+				</div><!-- /.info-box -->
+
+			</div>
+
+
+		</div>
+
+		<div class="row">
+			<div class="col-md-9">
+				<a class="btn btn-primary" href="javascript: $('#restart-modal').modal('show');"><?php print __('Restart All Services');?></a>
+				<a class="btn btn-primary submenu-select-link" href='javascript:checkedAll("objects");'> <?php print __('toggle all');?> </a>
+
+
+			</div>
+
+			<div class="col-md-3">
+				<form action="/bulk/service/" method="post" id="objects">
+					<select class="" name="action">
+						<option value=""><?php print __('apply to selected');?></option>
+						<option value="stop"><?php print __('stop');?></option>
+						<option value="start"><?php print __('start');?></option>
+						<option value="restart"><?php print __('restart');?></option>
+					</select>
+					<input type="submit" name="ok" value="›" class="submenu-button-select">
+				</form>
+			</div>
+		</div>
+		<br />
+
+		<div class="row">
+		<? foreach ($data as $key => $value) : ?>
+			<?php
+
+			++$i;
+			if ($data[$key]['STATE'] == 'running') {
+				$status = 'active';
+				$action = 'stop';
+			} else {
+				$status = 'suspended';
+				$action = 'start';
+			}
+
+			$cpu = $data[$key]['CPU'] / 10;
+			$cpu = number_format($cpu, 1);
+			if ($cpu == '0.0')  $cpu = 0;
+
+			$boxClass = ($data[$key]['STATE'] == "running") ? "box-info" : "box-danger";
+
+			?>
+
+
+
+				<div class="col-md-3">
+
+					<div class="box <?=$boxClass ?>">
+						<div class="box-header">
+							<h3 class="box-title"> <?php echo $key ?> <small> (<?php echo __($data[$key]['STATE']); ?>)</small></h3>
+						</div>
+						<div class="box-body">
+							<div class="row">
+								<div class="col-md-1">
+									<input type="checkbox" class="ch-toggle" name="service[]" value="<?php echo $key ?>" >
+								</div>
+								<div class="col-md-9">
+
+									<?php print __('Uptime');?>: <?php echo humanize_time($data[$key]['RTIME']) ?>
+									<br />
+									<?php print __('CPU');?>: <?php echo $cpu ?>%
+									<br />
+									<?php print __('Memory');?>:  <?php echo $data[$key]['MEM'] ?> <?php print __('mb');?>
+								</div>
+							</div>
+						</div>
+						<div class="box-footer">
+							<a href="/restart/service/?srv=<?php echo $key ?>" class="data-controls btn btn-default">
+								<?php print __('restart'); ?>
+							</a>
+
+							<a href="/<?php echo $action ?>/service/?srv=<?php echo $key ?>" class="data-controls btn btn-default">
+								<?php print __($action); ?>
+							</a>
+
+						</div>
+					</div>
+				</div>
+
+		<? endforeach; ?>
+		</div>
+
+		<!-- Confirm Dialog for Suspend -->
+		<div class="modal modal-primary" id="restart-modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title"><?php print __('Confirmation');?></h4>
+					</div>
+					<div class="modal-body">
+						<p><?php print __('RESTART_CONFIRMATION',$sys['sysinfo']['HOSTNAME']);?></p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
+						<a class="btn btn-outline" href="/restart/system/?hostname=<?php echo $sys['sysinfo']['HOSTNAME']?>"  onclick="$(this).html('Please Wait...')"><?php print __("Confirm");?></a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+</div>
+
+
+
+
                     <td class="data-dotted" width="830px">
-                        <a href="/restart/service/?srv=<?php echo $key ?>" class="data-controls">
-                            <span>
-                                <img src="/images/reload.png" width="6px" height="7px">
-                                <?php print __('restart'); ?> 
-                            </span>
-                        </a>
-                        <a href="/<?php echo $action ?>/service/?srv=<?php echo $key ?>" class="data-controls">
-                            <span>
-                                <img src="/images/<?php echo $action ?>.png" width="7px" height="7px">
-                                <?php print __($action); ?> 
-                            </span>
-                        </a>
+
+
 
                         <table class="data-col2">
                             <tr>
                                 <td colspan=4 class="domain step-left">
-                                    <b><?php echo $key ?></b>
+                                    <b></b>
                                 </td>
                             </tr>
                             <tr>
@@ -145,55 +185,19 @@
                                     <table>
                                         <tr>
                                             <td class="counter-name">
-                                                <?php echo __($data[$key]['SYSTEM']) ?> 
+	                                            <?php echo __($data[$key]['SYSTEM']) ?>
                                             </td>
                                         </tr>
                                     </table>
                                 </td>
-                                <td style="vertical-align:top;" width="120px">
-                                    <table>
-                                        <tr>
-                                            <td class="counter-name">
-                                                <?php print __('CPU');?>:
-                                            </td>
-                                            <td class="counter-value">
-                                                <?php echo $cpu ?>%
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td style="vertical-align:top;" width="170px">
-                                    <table>
-                                        <tr>
-                                            <td class="counter-name">
-                                                <?php print __('Memory');?>:
-                                            </td>
-                                            <td class="counter-value">
-                                                <?php echo $data[$key]['MEM'] ?> <?php print __('mb');?> 
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td style="vertical-align:top;">
-                                    <table>
-                                        <tr>
-                                            <td class="counter-name">
-                                                <?php print __('Uptime');?>:
-                                            </td>
-                                            <td class="counter-value">
-                                                <?php echo humanize_time($data[$key]['RTIME']) ?> 
-                                            </td>
-                                        </tr>
-                                    </table>
+
                                 </td>
                             </tr>
                         </table>
                     </td>
                 </tr>
 
-                <?php
-                    }
-                ?> 
+
             </table>
             </form>
 
