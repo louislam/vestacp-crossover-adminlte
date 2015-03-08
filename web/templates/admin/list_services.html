@@ -66,22 +66,28 @@
 
 		<div class="row">
 			<div class="col-md-9">
-				<a class="btn btn-primary" href="javascript: $('#restart-modal').modal('show');"><?php print __('Restart All Services');?></a>
-				<a class="btn btn-primary submenu-select-link" href='javascript:checkedAll("objects");'> <?php print __('toggle all');?> </a>
+				<a class="btn btn-default" href="javascript: $('#restart-modal').modal('show');"><i class="fa  fa-refresh"></i> <?php print __('Restart All Services');?></a>
+				<a class="btn btn-default submenu-select-link" href='javascript:checkedAll("objects");'><i class="fa  fa-check-square"></i> <?php print __('toggle all');?> </a>
 
 
 			</div>
 
+
+		</div>
+		<br />
+
+		<div class="row">
 			<div class="col-md-3">
 
-				<select class="" name="action">
+				<select class="form-control" name="action">
 					<option value=""><?php print __('apply to selected');?></option>
 					<option value="stop"><?php print __('stop');?></option>
 					<option value="start"><?php print __('start');?></option>
 					<option value="restart"><?php print __('restart');?></option>
 				</select>
-				<input type="submit" name="ok" value="›" class="submenu-button-select">
-
+			</div>
+			<div class="col-md-1" style="padding-left: 1px">
+				<input type="submit" name="ok" value="Apply" class="btn btn-default btn-block" >
 			</div>
 		</div>
 		<br />
@@ -112,9 +118,9 @@
 				<div class="col-md-3">
 
 
-					<div class="box <?=$boxClass ?>">
+					<div class="box box-solid <?=$boxClass ?>">
 						<div class="box-header">
-							<h2 class="box-title">[<?php echo __($data[$key]['SYSTEM']) ?>] <?php echo $key ?> <br /><small> (<?php echo __($data[$key]['STATE']); ?>)</small></h2>
+							<h2 class="box-title">[<?php echo __($data[$key]['SYSTEM']) ?>] <?php echo $key ?> </h2>
 						</div>
 						<div class="box-body">
 							<div class="row">
@@ -122,7 +128,8 @@
 									<input type="checkbox" class="ch-toggle" name="service[]" value="<?php echo $key ?>" >
 								</div>
 								<div class="col-md-9">
-
+									Status: <?php echo __($data[$key]['STATE']); ?>
+									<br />
 									<?php print __('Uptime');?>: <?php echo humanize_time($data[$key]['RTIME']) ?>
 									<br />
 									<?php print __('CPU');?>: <?php echo $cpu ?>%
