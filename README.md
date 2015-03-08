@@ -15,6 +15,8 @@ Still work in progress, do not try it on any production server. Currently it is 
 * reset_3.html - 0%
 
 ### web\admin\
+add_user.html - 100%
+list_user.html - 90%
 
 ### web\user\
 
