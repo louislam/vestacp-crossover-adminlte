@@ -111,6 +111,7 @@
 
 				<div class="col-md-3">
 
+
 					<div class="box <?=$boxClass ?>">
 						<div class="box-header">
 							<h2 class="box-title">[<?php echo __($data[$key]['SYSTEM']) ?>] <?php echo $key ?> <br /><small> (<?php echo __($data[$key]['STATE']); ?>)</small></h2>
@@ -131,12 +132,12 @@
 							</div>
 						</div>
 						<div class="box-footer">
-							<a href="/restart/service/?srv=<?php echo $key ?>" class="data-controls btn btn-default">
+							<a href="/restart/service/?srv=<?php echo $key ?>" onclick="$(this).parent().parent().find('.overlay').show()"  class="data-controls btn btn-default">
 								<i class="fa  fa-refresh"></i>
 								<?php print __('restart'); ?>
 							</a>
 
-							<a href="/<?php echo $action ?>/service/?srv=<?php echo $key ?>" class="data-controls btn btn-default">
+							<a href="/<?php echo $action ?>/service/?srv=<?php echo $key ?>" onclick="$(this).parent().parent().find('.overlay').show()" class="data-controls btn btn-default">
 
 								<? if ($action == "stop") : ?>
 									<i class="fa fa-stop"></i>
@@ -148,6 +149,10 @@
 								<?php print __($action); ?>
 							</a>
 
+						</div>
+
+						<div class="overlay" style="display: none">
+							<i class="fa fa-refresh fa-spin"></i>
 						</div>
 					</div>
 				</div>
