@@ -40,7 +40,7 @@
 
 		<div class="row">
 
-			<div class="col-md-5">
+			<div class="col-md-9">
 				<?php if ($user == 'admin') : ?>
 					<a href="/add/user/" class="btn btn-primary"><?php echo __('Add User') ?></a>
 				<?php else: ?>
@@ -50,11 +50,11 @@
 
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-3">
 
 				<a class="submenu-select-link btn btn-primary" href='javascript:checkedAll("objects");'> <?php print __('toggle all');?> </a>
 
-				<select name="action" class="submenu-select-dropdown apply-dropdown">
+				<select name="action" class="">
 					<option value=""><?php print __('apply to selected');?></option>
 					<option value="rebuild"><?php print __('rebuild');?></option>
 					<option value="rebuild web"><?php print __('rebuild web');?></option>
@@ -69,17 +69,6 @@
 				</select>
 				<input type="submit" name="ok" value="›" class="submenu-button-select btn btn-primary" />
 
-			</div>
-
-			<div class="col-md-3">
-				<form action="/search/" method="get">
-					<div class="input-group input-group-sm">
-						<input type="text" name="q" class="submenu-search-field form-control" />
-						<span class="input-group-btn">
-							<input type="submit" value="<?php print __('Search');?>" class="submenu-button-search btn btn-info btn-flat" />
-						</span>
-					</div>
-				</form>
 			</div>
 
 		</div>
