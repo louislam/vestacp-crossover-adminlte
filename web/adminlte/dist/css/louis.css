@@ -1,3 +1,6 @@
 .actions .btn {
   margin: 5px 6px 5px 0;
 }
+.rrd-graph {
+  max-width: 100%;
+}
