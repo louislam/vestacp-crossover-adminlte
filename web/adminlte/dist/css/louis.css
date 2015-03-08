@@ -4,3 +4,9 @@
 .rrd-graph {
   max-width: 100%;
 }
+.orange {
+  background-color: #F79B44;
+}
+.skin-orange .content-wrapper {
+  background-color: #F9F4EE;
+}
