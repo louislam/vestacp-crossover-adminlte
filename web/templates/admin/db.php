@@ -233,5 +233,11 @@ $back = getBack("/list/db/");
 	GLOBAL.DB_USER_PREFIX = '<?php echo $user; ?>_';
 	GLOBAL.DB_DBNAME_PREFIX = '<?php echo $user; ?>_';
 </script>
-<script type="text/javascript" src="/js/pages/add.db.js"></script>
-<script type="text/javascript" src="/js/pages/edit.db.js"></script>
+
+<? if (isEditPage($formName)) : ?>
+	<script type="text/javascript" src="/js/pages/edit.db.js"></script>
+<? else : ?>
+	<script type="text/javascript" src="/js/pages/add.db.js"></script>
+<? endif; ?>
+
+
