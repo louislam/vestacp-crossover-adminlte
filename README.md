@@ -7,12 +7,12 @@ Still work in progress, do not try it on any production server. Currently it is 
 ## Progress
 
 ### web\
-footer.html	- 100%
-header.html - 90%
-login.html - 100% 
-reset_1.html - 100%
-reset_2.html - 0%
-reset_3.html - 0%
+* footer.html	- 100%
+* header.html - 90%
+* login.html - 100% 
+* reset_1.html - 100%
+* reset_2.html - 0%
+* reset_3.html - 0%
 
 ### web\admin\
 
