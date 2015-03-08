@@ -1,3 +1,4 @@
+<form action="/bulk/service/" method="post" id="objects">
 <div class="content-wrapper">
 	<?php include "content_header.php" ?>
 
@@ -72,15 +73,15 @@
 			</div>
 
 			<div class="col-md-3">
-				<form action="/bulk/service/" method="post" id="objects">
-					<select class="" name="action">
-						<option value=""><?php print __('apply to selected');?></option>
-						<option value="stop"><?php print __('stop');?></option>
-						<option value="start"><?php print __('start');?></option>
-						<option value="restart"><?php print __('restart');?></option>
-					</select>
-					<input type="submit" name="ok" value="›" class="submenu-button-select">
-				</form>
+
+				<select class="" name="action">
+					<option value=""><?php print __('apply to selected');?></option>
+					<option value="stop"><?php print __('stop');?></option>
+					<option value="start"><?php print __('start');?></option>
+					<option value="restart"><?php print __('restart');?></option>
+				</select>
+				<input type="submit" name="ok" value="›" class="submenu-button-select">
+
 			</div>
 		</div>
 		<br />
@@ -112,7 +113,7 @@
 
 					<div class="box <?=$boxClass ?>">
 						<div class="box-header">
-							<h3 class="box-title"> <?php echo $key ?> <small> (<?php echo __($data[$key]['STATE']); ?>)</small></h3>
+							<h2 class="box-title">[<?php echo __($data[$key]['SYSTEM']) ?>] <?php echo $key ?> <br /><small> (<?php echo __($data[$key]['STATE']); ?>)</small></h2>
 						</div>
 						<div class="box-body">
 							<div class="row">
@@ -131,10 +132,19 @@
 						</div>
 						<div class="box-footer">
 							<a href="/restart/service/?srv=<?php echo $key ?>" class="data-controls btn btn-default">
+								<i class="fa  fa-refresh"></i>
 								<?php print __('restart'); ?>
 							</a>
 
 							<a href="/<?php echo $action ?>/service/?srv=<?php echo $key ?>" class="data-controls btn btn-default">
+
+								<? if ($action == "stop") : ?>
+									<i class="fa fa-stop"></i>
+								<? else : ?>
+									<i class="fa fa-play"></i>
+								<? endif; ?>
+
+
 								<?php print __($action); ?>
 							</a>
 
@@ -167,38 +177,5 @@
 	</section>
 </div>
 
+</form>
 
-
-
-                    <td class="data-dotted" width="830px">
-
-
-
-                        <table class="data-col2">
-                            <tr>
-                                <td colspan=4 class="domain step-left">
-                                    <b></b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="step-left" style="vertical-align:top;" width="189px">
-                                    <table>
-                                        <tr>
-                                            <td class="counter-name">
-	                                            <?php echo __($data[$key]['SYSTEM']) ?>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-
-
-            </table>
-            </form>
-
-        </div>
