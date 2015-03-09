@@ -12,8 +12,8 @@
 					<span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
 
 					<div class="info-box-content">
-						<span class="info-box-text"><?php print __('users');?></span>
-						<span class="info-box-number"><? echo $panel[$user]['U_USERS']?></span>
+						<span class="info-box-text"><?php print __('users'); ?></span>
+						<span class="info-box-number"><? echo $panel[$user]['U_USERS'] ?></span>
 					</div>
 					<!-- /.info-box-content -->
 				</div>
@@ -26,8 +26,8 @@
 					<span class="info-box-icon bg-red"><i class="fa fa-times"></i></span>
 
 					<div class="info-box-content">
-						<span class="info-box-text"><?php print __('spnd');?></span>
-						<span class="info-box-number"><? echo $panel[$user]['SUSPENDED_USERS']?></span>
+						<span class="info-box-text"><?php print __('spnd'); ?></span>
+						<span class="info-box-number"><? echo $panel[$user]['SUSPENDED_USERS'] ?></span>
 					</div>
 					<!-- /.info-box-content -->
 				</div>
@@ -37,238 +37,246 @@
 		</div>
 
 
-
 		<div class="row">
 
 			<div class="col-md-9">
 				<?php if ($user == 'admin') : ?>
-					<a href="/add/user/" class="btn btn-primary"><?php echo __('Add User') ?></a>
+					<a href="/add/user/" class="btn btn-default"><?php echo __('Add User') ?></a>
 				<?php else: ?>
-					<a href="/add/web/" class="btn btn-primary"><?php echo __('Add Web Domain') ?></a>
+					<a href="/add/web/" class="btn btn-default"><?php echo __('Add Web Domain') ?></a>
 				<?php endif; ?>
-				<br /><br />
+
+				<a class="submenu-select-link btn btn-default" href='javascript:checkedAll("objects");'> <?php print __('toggle all'); ?> </a>
 
 			</div>
 
-			<div class="col-md-3">
 
-				<a class="submenu-select-link btn btn-primary" href='javascript:checkedAll("objects");'> <?php print __('toggle all');?> </a>
-
-				<select name="action" class="">
-					<option value=""><?php print __('apply to selected');?></option>
-					<option value="rebuild"><?php print __('rebuild');?></option>
-					<option value="rebuild web"><?php print __('rebuild web');?></option>
-					<option value="rebuild dns"><?php print __('rebuild dns');?></option>
-					<option value="rebuild mail"><?php print __('rebuild mail');?></option>
-					<option value="rebuild db"><?php print __('rebuild db');?></option>
-					<option value="rebuild cron"><?php print __('rebuild cron');?></option>
-					<option value="update counters"><?php print __('update counters');?></option>
-					<option value="suspend"><?php print __('suspend');?></option>
-					<option value="unsuspend"><?php print __('unsuspend');?></option>
-					<option value="delete"><?php print __('delete');?></option>
-				</select>
-				<input type="submit" name="ok" value="›" class="submenu-button-select btn btn-primary" />
-
-			</div>
 
 		</div>
+		<br />
+		<div class="row">
+			<div class="col-md-3">
 
 
+				<select name="action" class="form-control">
+					<option value=""><?php print __('apply to selected'); ?></option>
+					<option value="rebuild"><?php print __('rebuild'); ?></option>
+					<option value="rebuild web"><?php print __('rebuild web'); ?></option>
+					<option value="rebuild dns"><?php print __('rebuild dns'); ?></option>
+					<option value="rebuild mail"><?php print __('rebuild mail'); ?></option>
+					<option value="rebuild db"><?php print __('rebuild db'); ?></option>
+					<option value="rebuild cron"><?php print __('rebuild cron'); ?></option>
+					<option value="update counters"><?php print __('update counters'); ?></option>
+					<option value="suspend"><?php print __('suspend'); ?></option>
+					<option value="unsuspend"><?php print __('unsuspend'); ?></option>
+					<option value="delete"><?php print __('delete'); ?></option>
+				</select>
+
+			</div>
+
+			<div class="col-md-1">
+				<input type="submit" name="ok" value="Apply" class="submenu-button-select btn btn-default"/>
+			</div>
+		</div>
+		<br />
 
 		<?php display_error_block(); ?>
 
 
 		<form action="/bulk/user/" method="post" id="objects">
 
-		<?php foreach ($data as $key => $value) : ?>
+			<?php foreach ($data as $key => $value) : ?>
 
-			<?php
-					++$i;
-					if ($data[$key]['SUSPENDED'] == 'yes') {
-						$status = 'suspended';
-						$spnd_action = 'unsuspend' ;
-						$spnd_confirmation = 'UNSUSPEND_USER_CONFIRMATION' ;
-					} else {
-						$status = 'active';
-						$spnd_action = 'suspend' ;
-						$spnd_confirmation = 'SUSPEND_USER_CONFIRMATION' ;
-					}
-			?>
+				<?php
+				++$i;
+				if ($data[$key]['SUSPENDED'] == 'yes') {
+					$status = 'suspended';
+					$spnd_action = 'unsuspend';
+					$spnd_confirmation = 'UNSUSPEND_USER_CONFIRMATION';
+				} else {
+					$status = 'active';
+					$spnd_action = 'suspend';
+					$spnd_confirmation = 'SUSPEND_USER_CONFIRMATION';
+				}
+				?>
 
-		<div class="box box-default">
-			<div class='box-body'>
-				<div class="row">
-					<div class="col-md-1">
-						<input type="checkbox" class="ch-toggle" name="user[]" value="<?php echo $key ?>" />
-					</div>
-					<div class="col-md-11">
+				<div class="box box-default">
+					<div class='box-body'>
+						<div class="row">
+							<div class="col-md-1">
+								<input type="checkbox" class="ch-toggle" name="user[]" value="<?php echo $key ?>"/>
+							</div>
 
-						<table class="data-col2">
-							<tr>
-								<td colspan=3 class="username"><b><?php echo $key ?> <b>(<?php echo __($status) ?>)</b></b>
-							</tr>
-							<tr>
-								<td style="vertical-align:top;" width="239px">
-									<table>
-										<tr><td colspan=2 class="counter-name"><?php echo $data[$key]['FNAME'] ?> <?php echo $data[$key]['LNAME'] ?></td></tr>
-										<tr><td colspan=2><div style="height:10px;"></div></td></tr>
-										<tr>
-											<td class="chart" colspan=2>
-												<?php print __('Bandwidth');?>: <?php echo humanize_usage($data[$key]['U_BANDWIDTH']) ?>
-												<div class="bar" title="<?php echo get_percentage($data[$key]['U_BANDWIDTH'],$data[$key]['BANDWIDTH']) ?>%">
-													<div class="fill" style="width:<?php echo get_percentage($data[$key]['U_BANDWIDTH'],$data[$key]['BANDWIDTH']) ?>%;"></div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td class="chart" colspan=2 style="padding: 0px 0 0 0;"><?php print __('Disk');?>: <?php echo humanize_usage($data[$key]['U_DISK']) ?>
-												<div class="bar" title="<?php echo get_percentage($data[$key]['U_DISK'],$data[$key]['DISK_QUOTA']) ?>%">
-													<div class="fill" style="width:<?php echo get_percentage($data[$key]['U_DISK'],$data[$key]['DISK_QUOTA']) ?>%"></div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td class="mini-info" colspan=2>
-												<table>
-													<tr>
-														<td>
-															<?php print __('Web');?>: <?php echo humanize_usage($data[$key]['U_DISK_WEB'])?>
-														</td>
-														<td style="padding: 2px 0px 2px 4px">
-															<?php print __('Databases');?>: <?php echo humanize_usage($data[$key]['U_DISK_DB'])?>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<?php print __('Mail');?>: <?php echo humanize_usage($data[$key]['U_DISK_MAIL'])?>
+							<div class="col-md-3">
+								<table>
+									<tr>
+										<td colspan=2 class="counter-name"><?php echo $data[$key]['FNAME'] ?> <?php echo $data[$key]['LNAME'] ?></td>
+									</tr>
+									<tr>
+										<td colspan=2>
+											<div style="height:10px;"></div>
+										</td>
+									</tr>
+									<tr>
+										<td class="chart" colspan=2>
+											<?php print __('Bandwidth'); ?>: <?php echo humanize_usage($data[$key]['U_BANDWIDTH']) ?>
+											<div class="bar" title="<?php echo get_percentage($data[$key]['U_BANDWIDTH'], $data[$key]['BANDWIDTH']) ?>%">
+												<div class="fill" style="width:<?php echo get_percentage($data[$key]['U_BANDWIDTH'], $data[$key]['BANDWIDTH']) ?>%;"></div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="chart" colspan=2 style="padding: 0px 0 0 0;"><?php print __('Disk'); ?>: <?php echo humanize_usage($data[$key]['U_DISK']) ?>
+											<div class="bar" title="<?php echo get_percentage($data[$key]['U_DISK'], $data[$key]['DISK_QUOTA']) ?>%">
+												<div class="fill" style="width:<?php echo get_percentage($data[$key]['U_DISK'], $data[$key]['DISK_QUOTA']) ?>%"></div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="mini-info" colspan=2>
+											<table>
+												<tr>
+													<td>
+														<?php print __('Web'); ?>: <?php echo humanize_usage($data[$key]['U_DISK_WEB']) ?>
+													</td>
+													<td style="padding: 2px 0px 2px 4px">
+														<?php print __('Databases'); ?>: <?php echo humanize_usage($data[$key]['U_DISK_DB']) ?>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<?php print __('Mail'); ?>: <?php echo humanize_usage($data[$key]['U_DISK_MAIL']) ?>
 
-														</td>
-														<td style="padding: 0px 0px 0px 4px">
-															<?php print __('User Directories');?>: <?php echo humanize_usage($data[$key]['U_DISK_DIRS'])?>
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-									</table>
-								</td>
-								<td style="vertical-align:top;" width="238px">
-									<table>
-										<tr>
-											<td class="counter-name"><?php print __('Web Domains');?>:</td>
-											<td class="counter-value"><?php echo $data[$key]['U_WEB_DOMAINS'] ?> / <?php echo $data[$key]['WEB_DOMAINS'] ?></td>
-										</tr>
-										<tr>
-											<td class="counter-name"><?php print __('DNS Domains');?>:</td>
-											<td class="counter-value"><?php echo $data[$key]['U_DNS_DOMAINS'] ?> / <?php echo $data[$key]['DNS_DOMAINS'] ?></td>
-										</tr>
-										<tr>
-											<td class="counter-name"><?php print __('Mail Domains');?>:</td>
-											<td class="counter-value"><?php echo $data[$key]['U_MAIL_DOMAINS'] ?> / <?php echo $data[$key]['MAIL_DOMAINS'] ?></td>
-										</tr>
-										<tr>
-											<td class="counter-name"><?php print __('Databases');?>:</td>
-											<td class="counter-value"><?php echo $data[$key]['U_DATABASES'] ?> / <?php echo $data[$key]['DATABASES'] ?></td>
-										</tr>
-										<tr>
-											<td class="counter-name"><?php print __('Cron Jobs');?>:</td>
-											<td class="counter-value"><?php echo $data[$key]['U_CRON_JOBS'] ?> / <?php echo $data[$key]['CRON_JOBS'] ?></td>
-										</tr>
-										<tr>
-											<td class="counter-name"><?php print __('Backups');?>:</td>
-											<td class="counter-value"><?php echo $data[$key]['U_BACKUPS'] ?> / <?php echo $data[$key]['BACKUPS'] ?></td>
-										</tr>
-									</table>
-								</td>
-								<td style="vertical-align:top;">
-									<table>
-										<tr>
-											<td class="counter-name"><?php print __('Email');?>:</td>
-											<td class="counter-value"><?php echo $data[$key]['CONTACT'] ?></td>
-										</tr>
-										<tr>
-											<td class="counter-name"><?php print __('Package');?>:</td>
-											<td class="counter-value"><?php echo $data[$key]['PACKAGE'] ?></td>
-										</tr>
-										<tr>
-											<td class="counter-name"><?php print __('SSH Access');?>:</td>
-											<td class="counter-value"><?php echo $data[$key]['SHELL'] ?></td>
-										</tr>
-										<tr>
-											<td class="counter-name"><?php print __('IP Addresses');?>:</td>
-											<td class="counter-value"><?php echo $data[$key]['IP_OWNED'] ?></td>
-										</tr>
-										<tr>
-											<td class="counter-name"><?php print __('Name Servers');?>:</td>
-											<td class="counter-value"><?php echo str_replace(',', '<br>',$data[$key]['NS']) ?></td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-						</table>
-					</div>
+													</td>
+													<td style="padding: 0px 0px 0px 4px">
+														<?php print __('User Directories'); ?>: <?php echo humanize_usage($data[$key]['U_DISK_DIRS']) ?>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</div>
 
-				</div>
+							<div class="col-md-3">
+								<table>
+									<tr>
+										<td class="counter-name"><?php print __('Web Domains'); ?>:</td>
+										<td class="counter-value"><?php echo $data[$key]['U_WEB_DOMAINS'] ?> / <?php echo $data[$key]['WEB_DOMAINS'] ?></td>
+									</tr>
+									<tr>
+										<td class="counter-name"><?php print __('DNS Domains'); ?>:</td>
+										<td class="counter-value"><?php echo $data[$key]['U_DNS_DOMAINS'] ?> / <?php echo $data[$key]['DNS_DOMAINS'] ?></td>
+									</tr>
+									<tr>
+										<td class="counter-name"><?php print __('Mail Domains'); ?>:</td>
+										<td class="counter-value"><?php echo $data[$key]['U_MAIL_DOMAINS'] ?> / <?php echo $data[$key]['MAIL_DOMAINS'] ?></td>
+									</tr>
+									<tr>
+										<td class="counter-name"><?php print __('Databases'); ?>:</td>
+										<td class="counter-value"><?php echo $data[$key]['U_DATABASES'] ?> / <?php echo $data[$key]['DATABASES'] ?></td>
+									</tr>
+									<tr>
+										<td class="counter-name"><?php print __('Cron Jobs'); ?>:</td>
+										<td class="counter-value"><?php echo $data[$key]['U_CRON_JOBS'] ?> / <?php echo $data[$key]['CRON_JOBS'] ?></td>
+									</tr>
+									<tr>
+										<td class="counter-name"><?php print __('Backups'); ?>:</td>
+										<td class="counter-value"><?php echo $data[$key]['U_BACKUPS'] ?> / <?php echo $data[$key]['BACKUPS'] ?></td>
+									</tr>
+								</table>
+							</div>
 
-				<div class="row actions">
-					<div class="col-md-1"></div>
-					<div class="col-md-11">
-						<a class="btn btn-danger"  href="javascript: $('#delete-modal-<?= $i ?>').modal('show');"><img src="/images/delete.png" width="7px" height="7px"> <?php print __('delete'); ?></a>
+							<div class="col-md-3">
 
-						<a class="btn btn-danger" href="javascript: $('#suspend-modal-<?=$i ?>').modal('show');" ><?php echo __($spnd_action); ?></a>
+								<table>
+									<tr>
+										<td class="counter-name"><?php print __('Email'); ?>:</td>
+										<td class="counter-value"><?php echo $data[$key]['CONTACT'] ?></td>
+									</tr>
+									<tr>
+										<td class="counter-name"><?php print __('Package'); ?>:</td>
+										<td class="counter-value"><?php echo $data[$key]['PACKAGE'] ?></td>
+									</tr>
+									<tr>
+										<td class="counter-name"><?php print __('SSH Access'); ?>:</td>
+										<td class="counter-value"><?php echo $data[$key]['SHELL'] ?></td>
+									</tr>
+									<tr>
+										<td class="counter-name"><?php print __('IP Addresses'); ?>:</td>
+										<td class="counter-value"><?php echo $data[$key]['IP_OWNED'] ?></td>
+									</tr>
+									<tr>
+										<td class="counter-name"><?php print __('Name Servers'); ?>:</td>
+										<td class="counter-value"><?php echo str_replace(',', '<br>', $data[$key]['NS']) ?></td>
+									</tr>
+								</table>
 
-						<a class="btn btn-primary" href="/edit/user/?user=<?php echo $key; ?>"><?php print __('edit'); ?></a>
+							</div>
 
-						<?php if ($key == $user) : ?>
-							<a class="btn btn-primary" href="/logout"><?php print __('logout'); ?></a>
-						<?php else : ?>
-							<a class="btn btn-primary" href="/login/?loginas=<?php echo $key; ?>"><?php print __('login as') . " " . $key; ?></a>
-						<?php endif; ?>
-					</div>
-				</div>
-			</div>
-		</div>
-
-			<!-- Confirm Dialog for Delete -->
-			<div class="modal modal-danger" id="delete-modal-<?= $i  ?>">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title"><?php print __('Confirmation');?></h4>
 						</div>
-						<div class="modal-body">
-							<p><?php print __('DELETE_USER_CONFIRMATION',$key);?></p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
-							<a class="btn btn-outline" href="/delete/user/?user=<?php echo $key ?>" onclick="$(this).html('Please Wait...')"><?php print __("Confirm");?></a>
+					</div>
+
+					<div class="box-footer">
+						<div class="row actions">
+
+							<div class="col-md-12">
+								<a class="btn btn-default" href="javascript: $('#delete-modal-<?= $i ?>').modal('show');"><img src="/images/delete.png" width="7px" height="7px"> <?php print __('delete'); ?></a>
+
+								<a class="btn btn-default" href="javascript: $('#suspend-modal-<?= $i ?>').modal('show');"><?php echo __($spnd_action); ?></a>
+
+								<a class="btn btn-default" href="/edit/user/?user=<?php echo $key; ?>"><?php print __('edit'); ?></a>
+
+								<?php if ($key == $user) : ?>
+									<a class="btn btn-default" href="/logout"><?php print __('logout'); ?></a>
+								<?php else : ?>
+									<a class="btn btn-default" href="/login/?loginas=<?php echo $key; ?>"><?php print __('login as') . " " . $key; ?></a>
+								<?php endif; ?>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<!-- Confirm Dialog for Suspend -->
-			<div class="modal modal-danger" id="suspend-modal-<?= $i  ?>">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title"><?php print __('Confirmation');?></h4>
-						</div>
-						<div class="modal-body">
-							<p><?php print __($spnd_confirmation,$key);?></p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
-							<a class="btn btn-outline" href="/<?php echo $spnd_action ?>/user/?user=<?php echo $key ?>"  onclick="$(this).html('Please Wait...')"><?php print __("Confirm");?></a>
+				<!-- Confirm Dialog for Delete -->
+				<div class="modal modal-danger" id="delete-modal-<?= $i ?>">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title"><?php print __('Confirmation'); ?></h4>
+							</div>
+							<div class="modal-body">
+								<p><?php print __('DELETE_USER_CONFIRMATION', $key); ?></p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
+								<a class="btn btn-outline" href="/delete/user/?user=<?php echo $key ?>" onclick="$(this).html('Please Wait...')"><?php print __("Confirm"); ?></a>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+
+				<!-- Confirm Dialog for Suspend -->
+				<div class="modal modal-danger" id="suspend-modal-<?= $i ?>">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title"><?php print __('Confirmation'); ?></h4>
+							</div>
+							<div class="modal-body">
+								<p><?php print __($spnd_confirmation, $key); ?></p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
+								<a class="btn btn-outline" href="/<?php echo $spnd_action ?>/user/?user=<?php echo $key ?>" onclick="$(this).html('Please Wait...')"><?php print __("Confirm"); ?></a>
+							</div>
+						</div>
+					</div>
+				</div>
 
 
-		<?php endforeach; ?>
+			<?php endforeach; ?>
 
 		</form>
 	</section>
