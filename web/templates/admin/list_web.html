@@ -164,26 +164,9 @@
 							</div>
 						</div>
 						<div class="box-footer">
-							<a id="delete_link_<?php echo $i ?>" class="data-controls do_delete btn btn-default">
-                            <span class="do_delete">
-                                <img src="/images/delete.png" width="7px" height="7px">
-	                            <?php print __('delete');?>
-	                            <input type="hidden" name="delete_url" value="/delete/web/?domain=<?php echo $key ?>" />
-                                <div id="delete_dialog_<?php echo $i ?>" class="confirmation-text-delete hidden" title="<?php print __('Confirmation');?>">
-	                                <p class="confirmation"><?php print __('DELETE_DOMAIN_CONFIRMATION',$key);?></p>
-                                </div>
-                            </span>
-							</a>
-							<a id="<?php echo $spnd_action ?>_link_<?php echo $i ?>" class="data-controls do_<?php echo $spnd_action ?> btn btn-default">
-                            <span class="do_<?php echo $spnd_action ?>">
-                                <img src="/images/suspend.png" width="7px" height="8px">
-	                            <?php echo __($spnd_action); ?>
-	                            <input type="hidden" name="<?php echo $spnd_action ?>_url" value="/<?php echo $spnd_action ?>/web/?domain=<?php echo $key ?>" />
-                                <div id="<?php echo $spnd_action ?>_dialog_<?php echo $i ?>" class="confirmation-text-suspention hidden" title="<?php print __('Confirmation');?>">
-	                                <p class="confirmation"><?php print __($spnd_confirmation,$key);?></p>
-                                </div>
-                            </span>
-							</a>
+							<a class="btn btn-default"  href="javascript: $('#delete-modal-<?= $i ?>').modal('show');"> <img src="/images/delete.png" width="7px" height="8px"> <?php print __('delete'); ?></a>
+							<a class="btn btn-default" href="javascript: $('#suspend-modal-<?=$i ?>').modal('show');" > <img src="/images/suspend.png" width="7px" height="8px"> <?php echo __($spnd_action); ?></a>
+
 							<a href="/edit/web/?domain=<?php echo $key ?>" class="data-controls btn btn-default">
                             <span>
                                 <img src="/images/edit.png" width="8px" height="8px">
@@ -213,6 +196,45 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- Confirm Dialog for Delete -->
+			<div class="modal modal-danger" id="delete-modal-<?= $i  ?>">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title"><?php print __('Confirmation');?></h4>
+						</div>
+						<div class="modal-body">
+							<p><?php print __('DELETE_USER_CONFIRMATION',$key);?></p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
+							<a class="btn btn-outline" href="/delete/web/?domain=<?php echo $key ?>" onclick="$(this).html('Please Wait...')"><?php print __("Confirm");?></a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Confirm Dialog for Suspend -->
+			<div class="modal modal-danger" id="suspend-modal-<?= $i  ?>">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title"><?php print __('Confirmation');?></h4>
+						</div>
+						<div class="modal-body">
+							<p><?php print __($spnd_confirmation,$key);?></p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
+							<a class="btn btn-outline" href="/<?php echo $spnd_action ?>/web/?domain=<?php echo $key ?>"  onclick="$(this).html('Please Wait...')"><?php print __("Confirm");?></a>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		<?php
 		}
 		?>
@@ -229,46 +251,3 @@
 	</section>
 </div>
 </form>
-
-
-
-        <div id="vstobjects">
-            <table class='data'>
-
-                <tr class="data-ro">
-                    <td class="data-dotted">
-                        <table class="data-col1">
-                            <tr><td></td></tr>
-                            <tr><td><a class="data-date" title="<?php echo  $data[$key]['DATE']."  ".$data[$key]['TIME'] ?>"><?php echo strftime("%d %b %Y", strtotime($data[$key]['DATE'])) ?></a></td></tr>
-                            <tr><td class="data-<?php echo $status ?>"><b></b></td></tr>
-                        </table>
-                    </td>
-                    <td class="data-dotted">
-
-                        <table class="data-col2">
-                            <tr>
-                                <td colspan=3 class="domain">
-
-                                    <a class="aliases"></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align:top;" width="239px">
-
-                                </td>
-                                <td style="vertical-align:top;" width="238px">
-
-                                </td>
-                                <td rowspan=4 style="vertical-align:top;">
-
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-
-            </table>
-            </form>
-
-
-        </div>

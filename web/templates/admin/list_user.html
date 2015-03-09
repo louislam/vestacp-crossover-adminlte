@@ -213,9 +213,9 @@
 				<div class="row actions">
 					<div class="col-md-1"></div>
 					<div class="col-md-11">
-						<a class="btn btn-danger"  href="javascript: $('#delete-modal-<?= $key ?>').modal('show');"><!--<i class="fa fa-close"></i> --><?php print __('delete'); ?></a>
+						<a class="btn btn-danger"  href="javascript: $('#delete-modal-<?= $i ?>').modal('show');"><img src="/images/delete.png" width="7px" height="7px"> <?php print __('delete'); ?></a>
 
-						<a class="btn btn-danger" href="javascript: $('#suspend-modal-<?=$key ?>').modal('show');" ><!--<i class="fa fa-close"></i> --><?php echo __($spnd_action); ?></a>
+						<a class="btn btn-danger" href="javascript: $('#suspend-modal-<?=$i ?>').modal('show');" ><?php echo __($spnd_action); ?></a>
 
 						<a class="btn btn-primary" href="/edit/user/?user=<?php echo $key; ?>"><?php print __('edit'); ?></a>
 
@@ -230,7 +230,7 @@
 		</div>
 
 			<!-- Confirm Dialog for Delete -->
-			<div class="modal modal-danger" id="delete-modal-<?= $key  ?>">
+			<div class="modal modal-danger" id="delete-modal-<?= $i  ?>">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -249,7 +249,7 @@
 			</div>
 
 			<!-- Confirm Dialog for Suspend -->
-			<div class="modal modal-danger" id="suspend-modal-<?= $key  ?>">
+			<div class="modal modal-danger" id="suspend-modal-<?= $i  ?>">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
