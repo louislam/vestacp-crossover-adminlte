@@ -71,7 +71,7 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
-								<a class="btn btn-outline" href="/delete/db/?database=<?php echo "$key" ?>" onclick="$(this).html('Please Wait...')"><?php print __("Confirm");?></a>
+								<a class="btn btn-outline" href="TODO" onclick="$(this).html('Please Wait...')"><?php print __("Confirm");?></a>
 							</div>
 						</div>
 					</div>
@@ -90,7 +90,7 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
-								<a class="btn btn-outline" href="/<?php echo $spnd_action ?>/db/?database=<?php echo "$key" ?>"  onclick="$(this).html('Please Wait...')"><?php print __("Confirm");?></a>
+								<a class="btn btn-outline" href="TODO"  onclick="$(this).html('Please Wait...')"><?php print __("Confirm");?></a>
 							</div>
 						</div>
 					</div>
