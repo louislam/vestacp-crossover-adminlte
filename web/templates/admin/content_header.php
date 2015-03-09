@@ -6,3 +6,5 @@
 	</ol>
 </section>
 
+<? display_error_block(); ?>
+
