@@ -5,21 +5,7 @@
 Still work in progress, do not try it on any production server. Currently it is a INCOMPLETE theme.
 
 ## Progress
-
-### web\
-* footer.html	- 100%
-* header.html - 90%
-* login.html - 100% 
-* reset_1.html - 100%
-* reset_2.html - 0%
-* reset_3.html - 0%
-
-### web\admin\
-* add_cron.html - 100%
-* add_user.html - 100%
-* list_user.html - 90%
-
-### web\user\
+Around 10%
 
 ## Requirement
 Currrently target for the version of	0.9.8 Release:12.
