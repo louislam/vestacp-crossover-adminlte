@@ -67,7 +67,7 @@
 								<h4 class="modal-title"><?php print __('Confirmation');?></h4>
 							</div>
 							<div class="modal-body">
-								<p><?php print __('DELETE_USER_CONFIRMATION',$key);?></p>
+								<p>TODO</p>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
