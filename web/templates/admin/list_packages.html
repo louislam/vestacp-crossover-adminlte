@@ -1,163 +1,171 @@
-            <table class="submenu">
-                <tr>
-                    <td class="wrapper">
-                        <div class="submenu-button-block">
-                            <button class="submenu-button-main" onclick="location.href='/add/package/'"> <?php print __('Add Package');?> </button>
-                        </div>
-                        <div class="submenu-search-block">
-                            <form action="/search/" method="get">
-                            <input type="text" name="q" class="submenu-search-field">
-                            <input type="submit" value="<?php print __('Search');?>" class="submenu-button-search">
-                            </form>
-                        </div>
-                        <div class="submenu-select-block">
-                            <form action="/bulk/package/" method="post" id="objects">
-                            <a class="submenu-select-link" href='javascript:checkedAll("objects");'> <?php print __('toggle all');?> </a>
-                            <select class="submenu-select-dropdown" name="action">
-                                <option value=""><?php print __('apply to selected');?></option>
-                                <option value="delete"><?php print __('delete');?></option>
-                            </select>
-                            <input type="submit" name="ok" value="›" class="submenu-button-select">
-                        </div>
-                        <?php display_error_block(); ?> 
-                    </td>
-                </tr>
-            </table>
-        </div>
 
-        <div id="vstobjects">
-            <table class='data'>
+<form action="/bulk/package/" method="post" id="objects">
+	<div class="content-wrapper">
+		<?php include "content_header.php" ?>
 
-                <?php
-                    foreach ($data as $key => $value) {
-                        ++$i;
-                ?> 
+		<!-- Main content -->
+		<section class="content">
 
-                <tr class="data-row">
-                    <td class="data-dotted">
-                        <table class="data-col1">
-                            <tr><td><input type="checkbox" class="ch-toggle" name="package[]" value="<?php echo $key ?>"></td></tr>
-                            <tr><td><a class="data-date" title="<?php echo  $data[$key]['DATE']."  ".$data[$key]['TIME'] ?>"><?php echo strftime("%d %b %Y", strtotime($data[$key]['DATE'])) ?></a></td></tr>
-                        </table>
-                    </td>
-                    <td class="data-dotted">
-                        <a id="delete_link_<?php echo $i ?>" class="data-controls do_delete">
-                            <span class="do_delete">
-                                <img src="/images/delete.png" width="7px" height="7px" >
-                                <?php print __('delete');?> 
-                                <input type="hidden" name="delete_url" value="/delete/package/?package=<?php echo "$key" ?>" />
-                                <div id="delete_dialog_<?php echo $i ?>" class="confirmation-text-delete hidden" title="<?php print __('Confirmation');?>">
-                                    <p class="confirmation"><?php print __('DELETE_PACKAGE_CONFIRMATION',$key);?></p>
-                                </div>
-                            </span>
-                        </a>
+			<div class="row">
+				<div class="col-md-9">
+					<a class="btn btn-default" href="/add/package/"><i class="fa  fa-plus"></i> <?php print __('Add Package');?> </a>
+					<a class="btn btn-default submenu-select-link" href='javascript:checkedAll("objects");'><i class="fa  fa-check-square"></i> toggle all </a>
+				</div>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-md-3">
+					<select class="form-control" name="action">
+						<option value=""><?php print __('apply to selected');?></option>
+						<option value="delete"><?php print __('delete');?></option>
+					</select>
+				</div>
+				<div class="col-md-1">
+					<input type="submit" name="ok" value="Apply" class="btn btn-default">
+				</div>
+			</div>
+			<br />
+			<?php
+			foreach ($data as $key => $value) {
+				++$i;
+				?>
 
-                        <a href="/edit/package/?package=<?php echo $key ?>" class="data-controls">
-                            <span>
-                                <img src="/images/edit.png" width="8px" height="8px">
-                            <?php print __('edit');?> 
-                            </span>
-                        </a>
-                        <table class="data-col2">
-                            <tr>
-                                <td colspan=3 class="domain">
-                                    <?php echo $key?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="vertical-align:top;" width="239px">
-                                    <table>
-                                        <tr>
-                                            <td class="counter-name"><?php print __('Web Template');?>:</td>
-                                            <td class="counter-value"><?php echo $data[$key]['WEB_TEMPLATE'] ?> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="counter-name"><?php print __('Proxy Template');?>:</td>
-                                            <td class="counter-value"><?php echo $data[$key]['PROXY_TEMPLATE'] ?> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="counter-name"><?php print __('DNS Template');?>:</td>
-                                            <td class="counter-value"><?php echo $data[$key]['DNS_TEMPLATE'] ?> </td>
-                                        </tr>
-                                        </tr>
-                                            <td class="counter-name"><?php print __('SSH Access');?>:</td>
-                                            <td class="counter-value"><?php echo $data[$key]['SHELL'] ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="counter-name"><?php print __('Web Domains');?>:</td>
-                                            <td class="counter-value"><?php echo $data[$key]['WEB_DOMAINS'] ?> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="counter-name"><?php print __('Web Aliases');?>:</td>
-                                            <td class="counter-value"><?php echo $data[$key]['WEB_ALIASES'] ?> <?php print __('per domain');?> </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td style="vertical-align:top;" width="238px">
-                                    <table>
-                                        <tr>
-                                            <td class="counter-name"><?php print __('DNS domains');?>:</td>
-                                            <td class="counter-value"><?php echo $data[$key]['DNS_DOMAINS'] ?> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="counter-name"><?php print __('DNS records');?>:</td>
-                                            <td class="counter-value"><?php echo $data[$key]['DNS_RECORDS'] ?> <?php print __('per domain');?> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="counter-name"><?php print __('Mail Domains');?>:</td>
-                                            <td class="counter-value"><?php echo $data[$key]['MAIL_DOMAINS'] ?> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="counter-name"><?php print __('Mail Accounts');?>:</td>
-                                            <td class="counter-value"><?php echo $data[$key]['MAIL_ACCOUNTS'] ?> <?php print __('per domain');?> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="counter-name"><?php print __('Databases');?>:</td>
-                                            <td class="counter-value"><?php echo $data[$key]['DATABASES'] ?> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="counter-name"><?php print __('Cron Jobs');?>:</td>
-                                            <td class="counter-value"><?php echo $data[$key]['CRON_JOBS'] ?> </td>
-                                        <tr>
-                                    </table>
-                                </td>
-                                <td style="vertical-align:top;">
-                                    <table>
-                                            <td class="counter-name"><?php print __('Backups');?>:</td>
-                                            <td class="counter-value"><?php echo $data[$key]['BACKUPS'] ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="counter-name"><?php print __('Bandwidth');?>:</td>
-                                            <td class="counter-value"><?php echo humanize_usage($data[$key]['BANDWIDTH']) ?> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="counter-name"><?php print __('Disk');?>:</td>
-                                            <td class="counter-value"><?php echo humanize_usage($data[$key]['DISK_QUOTA']) ?> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="counter-name"><?php print __('Name Servers');?>:</td>
-                                            <td class="counter-value"><?php echo str_replace(',', '<br>',$data[$key]['NS']) ?> </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box  box-info">
+						<div class="box-header">
+							<h3 class="box-title"><?php echo $key ?>  </h3>
+						</div>
+						<div class="box-body">
+							<div class="row">
+								<div class="col-md-1">
+									<input type="checkbox" class="ch-toggle" name="package[]" value="<?php echo $key ?>">
+								</div>
+								<div class="col-md-3">
+									<table>
+										<tr>
+											<td class="counter-name"><?php print __('Web Template');?>:</td>
+											<td class="counter-value"><?php echo $data[$key]['WEB_TEMPLATE'] ?> </td>
+										</tr>
+										<tr>
+											<td class="counter-name"><?php print __('Proxy Template');?>:</td>
+											<td class="counter-value"><?php echo $data[$key]['PROXY_TEMPLATE'] ?> </td>
+										</tr>
+										<tr>
+											<td class="counter-name"><?php print __('DNS Template');?>:</td>
+											<td class="counter-value"><?php echo $data[$key]['DNS_TEMPLATE'] ?> </td>
+										</tr>
+										</tr>
+										<td class="counter-name"><?php print __('SSH Access');?>:</td>
+										<td class="counter-value"><?php echo $data[$key]['SHELL'] ?></td>
+										</tr>
+										<tr>
+											<td class="counter-name"><?php print __('Web Domains');?>:</td>
+											<td class="counter-value"><?php echo $data[$key]['WEB_DOMAINS'] ?> </td>
+										</tr>
+										<tr>
+											<td class="counter-name"><?php print __('Web Aliases');?>:</td>
+											<td class="counter-value"><?php echo $data[$key]['WEB_ALIASES'] ?> <?php print __('per domain');?> </td>
+										</tr>
+									</table>
+								</div>
+								<div class="col-md-3">
+									<table>
+										<tr>
+											<td class="counter-name"><?php print __('DNS domains');?>:</td>
+											<td class="counter-value"><?php echo $data[$key]['DNS_DOMAINS'] ?> </td>
+										</tr>
+										<tr>
+											<td class="counter-name"><?php print __('DNS records');?>:</td>
+											<td class="counter-value"><?php echo $data[$key]['DNS_RECORDS'] ?> <?php print __('per domain');?> </td>
+										</tr>
+										<tr>
+											<td class="counter-name"><?php print __('Mail Domains');?>:</td>
+											<td class="counter-value"><?php echo $data[$key]['MAIL_DOMAINS'] ?> </td>
+										</tr>
+										<tr>
+											<td class="counter-name"><?php print __('Mail Accounts');?>:</td>
+											<td class="counter-value"><?php echo $data[$key]['MAIL_ACCOUNTS'] ?> <?php print __('per domain');?> </td>
+										</tr>
+										<tr>
+											<td class="counter-name"><?php print __('Databases');?>:</td>
+											<td class="counter-value"><?php echo $data[$key]['DATABASES'] ?> </td>
+										</tr>
+										<tr>
+											<td class="counter-name"><?php print __('Cron Jobs');?>:</td>
+											<td class="counter-value"><?php echo $data[$key]['CRON_JOBS'] ?> </td>
+										<tr>
+									</table>
+								</div>
 
-                <?php
-                    }
-                ?> 
-            </table>
-            </form>
+								<div class="col-md-3">
+									<table>
+										<td class="counter-name"><?php print __('Backups');?>:</td>
+										<td class="counter-value"><?php echo $data[$key]['BACKUPS'] ?></td>
+										</tr>
+										<tr>
+											<td class="counter-name"><?php print __('Bandwidth');?>:</td>
+											<td class="counter-value"><?php echo humanize_usage($data[$key]['BANDWIDTH']) ?> </td>
+										</tr>
+										<tr>
+											<td class="counter-name"><?php print __('Disk');?>:</td>
+											<td class="counter-value"><?php echo humanize_usage($data[$key]['DISK_QUOTA']) ?> </td>
+										</tr>
+										<tr>
+											<td class="counter-name"><?php print __('Name Servers');?>:</td>
+											<td class="counter-value"><?php echo str_replace(',', '<br>',$data[$key]['NS']) ?> </td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="box-footer">
+							<a class="btn btn-default"  href="javascript: $('#delete-modal-<?= $i ?>').modal('show');"> <img src="/images/delete.png" width="7px" height="8px"> <?php print __('delete'); ?></a>
+							<a href="/edit/package/?package=<?php echo $key ?>" class="data-controls btn btn-default">
+				                            <span>
+				                                <img src="/images/edit.png" width="8px" height="8px">
+					                            <?php print __('edit');?>
+				                            </span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
 
-            <div class="data-count">
-                <?php
-                    if ( $i == 1) {
-                        echo __('1 package');
-                    } else {
-                        echo __('%s packages',$i);
-                    }
-                ?> 
-            </div>
-        </div>
+			<!-- Confirm Dialog for Delete -->
+			<div class="modal modal-danger" id="delete-modal-<?= $i  ?>">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title"><?php print __('Confirmation');?></h4>
+						</div>
+						<div class="modal-body">
+							<p><?php print __('DELETE_PACKAGE_CONFIRMATION',$key);?></p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
+							<a class="btn btn-outline" href="/delete/package/?package=<?php echo "$key" ?>" onclick="$(this).html('Please Wait...')"><?php print __("Confirm");?></a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<?php
+			}
+			?>
+
+			<div class="data-count">
+				<?php
+				if ( $i == 1) {
+				echo __('1 package');
+				} else {
+				echo __('%s packages',$i);
+				}
+				?>
+			</div>
+		</section>
+	</div>
+</form>
+
