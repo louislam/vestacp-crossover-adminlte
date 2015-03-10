@@ -50,7 +50,7 @@
 				<div class="col-md-12">
 					<div class="box  box-<?=$boxClass ?>">
 						<div class="box-header">
-							<h3 class="box-title"><?php echo $key ?> <small>(<?php echo __($status) ?>)</small> </h3>
+							<h3 class="box-title">[<?php echo $data[$key]['PORT'] ?>] <?php echo $data[$key]['PROTOCOL']?> <?php if (!empty($data[$key]['COMMENT'])) echo '/ ' . $data[$key]['COMMENT'] ?> <small>(<?php echo __($status) ?>)</small> </h3>
 						</div>
 						<div class="box-body">
 							<div class="row">
@@ -60,9 +60,8 @@
 								<div class="col-md-10">
 									<table class="data-col2">
 										<tr>
-											<td class="log"  width="119px"><b><?php echo $data[$key]['ACTION'] ?></b></td>
-											<td class="log"  width="119px"><?php echo $data[$key]['PROTOCOL']?> <?php if (!empty($data[$key]['COMMENT'])) echo '/ ' . $data[$key]['COMMENT'] ?></td>
-											<td class="log"  width="232px"><?php echo $data[$key]['PORT'] ?></td>
+											<td class="log"  width="100px"><b><?php echo $data[$key]['ACTION'] ?></b></td>
+
 											<td class="log" ><?php echo $data[$key]['IP'] ?></td>
 										</tr>
 									</table>
