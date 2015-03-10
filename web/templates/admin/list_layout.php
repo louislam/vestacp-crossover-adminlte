@@ -1,3 +1,8 @@
+<?
+/**
+ * No use, template layout for listing only.
+ */
+?>
 
 <form action="/bulk/TODO/" method="post" id="objects">
 	<div class="content-wrapper">
