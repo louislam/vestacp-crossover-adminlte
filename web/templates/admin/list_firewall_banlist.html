@@ -9,7 +9,7 @@
 
 			<div class="row">
 				<div class="col-md-9">
-					<a class="btn btn-default" href="/add/firewall/banlist//"><i class="fa  fa-plus"></i> <?php print __('Ban IP Address');?></a>
+					<a class="btn btn-default" href="/add/firewall/banlist/"><i class="fa  fa-plus"></i> <?php print __('Ban IP Address');?></a>
 					<a class="btn btn-default submenu-select-link" href='javascript:checkedAll("objects");'><i class="fa  fa-check-square"></i> toggle all </a>
 				</div>
 			</div>
@@ -80,8 +80,11 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
-							<a class="btn btn-outline" href="/delete/firewall/banlist/?ip=<?php echo $ip ?>&chain=<?php echo $chain ?>" onclick="$(this).html('Please Wait...')"><?php print __("Confirm");?></a>
-						</div>
+							<!--<input type="hidden" name="delete_url" value="/delete/firewall/banlist/?ip=<?php echo $ip ?>&chain=<?php echo $chain ?>"/>
+							<input type="submit" onclick="$(this).html('Please Wait...')" class="btn btn-outline" />-->
+							<a class="btn btn-outline" href="/delete/firewall/banlist/?ip=<?php echo urlencode($ip) ?>&chain=<?php echo urlencode($chain) ?>" onclick="$(this).html('Please Wait...')"><?php print __("Confirm");?></a>
+
+							</div>
 					</div>
 				</div>
 			</div>
