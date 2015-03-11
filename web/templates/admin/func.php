@@ -15,3 +15,8 @@ function getBack($path) {
 	}
 }
 
+function editDisabled($formName) {
+	if (isEditPage($formName))
+		echo 'disabled="disabled"';
+}
+
