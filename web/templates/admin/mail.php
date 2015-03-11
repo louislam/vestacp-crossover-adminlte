@@ -1,6 +1,6 @@
 <?
 require_once "func.php";
-$back = getBack("/list/firewall/");
+$back = getBack("/list/mail/");
 ?>
 
 
