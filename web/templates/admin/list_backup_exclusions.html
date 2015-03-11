@@ -1,87 +1,95 @@
-           <table class="submenu">
-                <tr>
-                    <td class="wrapper">
-                        <div class="submenu-button-block">
-                            <button class="submenu-button-main" onclick="location.href='/edit/backup/exclusions/'"> <?php print __('Configure');?> </button>
-                        </div>
-                        <div class="submenu-search-block">
-                            <form action="/search/" method="get">
-                            <input type="text" name="q" class="submenu-search-field">
-                            <input type="submit" value="<?php print __('Search');?>" class="submenu-button-search">
-                            </form>
-                        </div>
-                        <div class="submenu-select-block">
-                            <form action="/bulk/backup/exclusions/" method="post" id="objects">
-                            <a class="submenu-select-link" href='javascript:checkedAll("objects");'> <?php print __('toggle all');?> </a>
-                            <select class="submenu-select-dropdown" name="action">
-                                <option value=""><?php print __('apply to selected');?></option>
-                                <option value="delete"><?php print __('delete');?></option>
-                            </select>
-                            <input type="submit" name="ok" value="›" class="submenu-button-select">
-                        </div>
-                        <?php display_error_block(); ?> 
-                    </td>
-                </tr>
-            </table>
-        </div>
 
-        <div id="vstobjects">
-            <table class="data">
+<form action="/bulk/backup/exclusions/" method="post" id="objects">
+	<div class="content-wrapper">
+		<?php include "content_header.php" ?>
 
-                <?php
-                    foreach ($data as $key => $value) {
-                ?> 
+		<!-- Main content -->
+		<section class="content">
 
-                <tr class="data-row">
-                    <td class="data-dotted">
-                        <table class="data-col1">
-                            <tr><td><input type="checkbox" class="ch-toggle" name="system[]" value="<?php echo $key ?>" ></td></tr>
-                        </table>
-                    </td>
-                    <td class="data-dotted" width="830px">
-                        <a id="delete_link_<?php echo $i ?>" class="data-controls do_delete">
-                            <span class="do_delete">
-                                <img src="/images/delete.png" width="7px" height="7px">
-                                <?php print __('delete');?> 
-                                <input type="hidden" name="delete_url" value="/delete/backup/exclusion/?system=<?php echo "$key" ?>" />
-                                <div id="delete_dialog_<?php echo $i ?>" class="confirmation-text-delete hidden" title="<?php print __('Confirmation');?>">
-                                    <p class="confirmation"><?php print __('DELETE_EXCLUSION_CONFIRMATION',$key);?></p>
-                                </div>
-                            </span>
-                        </a>
-                        <table class="data-col5">
-                            <tr>
-                                <td class="cron" width="116px" style="vertical-align:top;">
-                                    <b><?php echo $key ?></b>
-                                </td>
-                                <td style="vertical-align:top;" class="counter-value">
-                                    <?php if (empty($value)) print __('no exclusions'); ?> 
-                                    <table>
-                                    <?php
-                                        foreach ($value as $ex_key => $ex_value) {
-                                    ?> 
-                                        <tr>
-                                            <td class="counter-value"><b><?php echo $ex_key ?></b></td>
-                                            <td class="counter-value" style="padding-left:12px;"><?php echo $ex_value ?></td>
-                                        </tr>
-                                    <?php
-                                        }
-                                    ?> 
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+			<div class="row">
+				<div class="col-md-9">
+					<a class="btn btn-default" href="/edit/backup/exclusions/"> <?php print __('Configure');?></a>
+					<a class="btn btn-default submenu-select-link" href='javascript:checkedAll("objects");'><i class="fa  fa-check-square"></i> toggle all </a>
+				</div>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-md-3">
+					<select class="form-control" name="action">
+						<option value=""><?php print __('apply to selected');?></option>
+						<option value="delete"><?php print __('delete');?></option>
+					</select>
+				</div>
+				<div class="col-md-1">
+					<input type="submit" name="ok" value="Apply" class="btn btn-default">
+				</div>
+			</div>
+			<br />
 
-                <?php
-                    }
-                ?> 
+			<?php
+			foreach ($data as $key => $value) {
+				?>
 
-            </table>
-            </form>
+				<?
+			$boxClass = ($status == "active") ? "info" : "danger";
+			?>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box  box-<?=$boxClass ?>">
+						<div class="box-header">
+							<h3 class="box-title"><?php echo $key ?> <small>(<?php echo __($status) ?>)</small> </h3>
+						</div>
+						<div class="box-body">
+							<div class="row">
+								<div class="col-md-1">
+									<input type="checkbox" class="ch-toggle" name="system[]" value="<?php echo $key ?>" >
+								</div>
+								<div class="col-md-3">
+									<?php if (empty($value)) print __('no exclusions'); ?>
 
-            <div class="data-count">
-                ...
-            </div>
-        </div>
+										<?php
+										foreach ($value as $ex_key => $ex_value) {
+											?>
+										<b><?php echo $ex_key ?></b>
+												<?php echo $ex_value ?><br />
+										<?php
+										}
+										?>
+								</div>
+
+							</div>
+						</div>
+						<div class="box-footer">
+							<a class="btn btn-default"  href="javascript: $('#delete-modal-<?= $i ?>').modal('show');"> <img src="/images/delete.png" width="7px" height="8px"> <?php print __('delete'); ?></a>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Confirm Dialog for Delete -->
+			<div class="modal modal-danger" id="delete-modal-<?= $i  ?>">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title"><?php print __('Confirmation');?></h4>
+						</div>
+						<div class="modal-body">
+							<p><?php print __('DELETE_EXCLUSION_CONFIRMATION',$key);?></p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><?php echo __('Close') ?></button>
+							<a class="btn btn-outline" href="/delete/backup/exclusion/?system=<?php echo "$key" ?>" onclick="$(this).html('Please Wait...')"><?php print __("Confirm");?></a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<?php
+			}
+			?>
+		</section>
+	</div>
+</form>
+
