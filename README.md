@@ -4,8 +4,6 @@
 
 Still work in progress, do not try it on any production server. Currently it is a INCOMPLETE theme.
 
-## Progress
-Around 10%
 
 ## Requirement
 Currrently target for the version of	0.9.8 Release:12.
