@@ -1,85 +1,85 @@
 <!-- Content Wrapper. Contains page content -->
 
 <form action="/bulk/user/" method="post" id="objects">
-<div class="content-wrapper">
-	<?php include "content_header.php" ?>
+	<div class="content-wrapper">
+		<?php include "content_header.php" ?>
 
-	<!-- Main content -->
-	<section class="content">
-		<!-- Info boxes -->
-		<div class="row">
-			<div class="col-md-3 col-sm-6 col-xs-12">
-				<div class="info-box">
-					<span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
+		<!-- Main content -->
+		<section class="content">
+			<!-- Info boxes -->
+			<div class="row">
+				<div class="col-md-3 col-sm-6 col-xs-12">
+					<div class="info-box">
+						<span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
 
-					<div class="info-box-content">
-						<span class="info-box-text"><?php print __('users'); ?></span>
-						<span class="info-box-number"><? echo $panel[$user]['U_USERS'] ?></span>
+						<div class="info-box-content">
+							<span class="info-box-text"><?php print __('users'); ?></span>
+							<span class="info-box-number"><? echo $panel[$user]['U_USERS'] ?></span>
+						</div>
+						<!-- /.info-box-content -->
 					</div>
-					<!-- /.info-box-content -->
+					<!-- /.info-box -->
 				</div>
-				<!-- /.info-box -->
-			</div>
-			<!-- /.col -->
+				<!-- /.col -->
 
-			<div class="col-md-3 col-sm-6 col-xs-12">
-				<div class="info-box">
-					<span class="info-box-icon bg-red"><i class="fa fa-times"></i></span>
+				<div class="col-md-3 col-sm-6 col-xs-12">
+					<div class="info-box">
+						<span class="info-box-icon bg-red"><i class="fa fa-times"></i></span>
 
-					<div class="info-box-content">
-						<span class="info-box-text"><?php print __('spnd'); ?></span>
-						<span class="info-box-number"><? echo $panel[$user]['SUSPENDED_USERS'] ?></span>
+						<div class="info-box-content">
+							<span class="info-box-text"><?php print __('spnd'); ?></span>
+							<span class="info-box-number"><? echo $panel[$user]['SUSPENDED_USERS'] ?></span>
+						</div>
+						<!-- /.info-box-content -->
 					</div>
-					<!-- /.info-box-content -->
+					<!-- /.info-box -->
 				</div>
-				<!-- /.info-box -->
-			</div>
-
-		</div>
-
-
-		<div class="row">
-
-			<div class="col-md-9">
-				<?php if ($user == 'admin') : ?>
-					<a href="/add/user/" class="btn btn-default"><?php echo __('Add User') ?></a>
-				<?php else: ?>
-					<a href="/add/web/" class="btn btn-default"><?php echo __('Add Web Domain') ?></a>
-				<?php endif; ?>
-
-				<a class="submenu-select-link btn btn-default" href='javascript:checkedAll("objects");'> <?php print __('toggle all'); ?> </a>
 
 			</div>
 
 
+			<div class="row">
 
-		</div>
-		<br />
-		<div class="row">
-			<div class="col-md-3">
+				<div class="col-md-9">
+					<?php if ($user == 'admin') : ?>
+						<a href="/add/user/" class="btn btn-default"><?php echo __('Add User') ?></a>
+					<?php else: ?>
+						<a href="/add/web/" class="btn btn-default"><?php echo __('Add Web Domain') ?></a>
+					<?php endif; ?>
 
+					<a class="submenu-select-link btn btn-default" href='javascript:checkedAll("objects");'> <?php print __('toggle all'); ?> </a>
 
-				<select name="action" class="form-control">
-					<option value=""><?php print __('apply to selected'); ?></option>
-					<option value="rebuild"><?php print __('rebuild'); ?></option>
-					<option value="rebuild web"><?php print __('rebuild web'); ?></option>
-					<option value="rebuild dns"><?php print __('rebuild dns'); ?></option>
-					<option value="rebuild mail"><?php print __('rebuild mail'); ?></option>
-					<option value="rebuild db"><?php print __('rebuild db'); ?></option>
-					<option value="rebuild cron"><?php print __('rebuild cron'); ?></option>
-					<option value="update counters"><?php print __('update counters'); ?></option>
-					<option value="suspend"><?php print __('suspend'); ?></option>
-					<option value="unsuspend"><?php print __('unsuspend'); ?></option>
-					<option value="delete"><?php print __('delete'); ?></option>
-				</select>
+				</div>
+
 
 			</div>
+			<br/>
 
-			<div class="col-md-1">
-				<input type="submit" name="ok" value="Apply" class="submenu-button-select btn btn-default"/>
+			<div class="row">
+				<div class="col-md-3">
+
+
+					<select name="action" class="form-control">
+						<option value=""><?php print __('apply to selected'); ?></option>
+						<option value="rebuild"><?php print __('rebuild'); ?></option>
+						<option value="rebuild web"><?php print __('rebuild web'); ?></option>
+						<option value="rebuild dns"><?php print __('rebuild dns'); ?></option>
+						<option value="rebuild mail"><?php print __('rebuild mail'); ?></option>
+						<option value="rebuild db"><?php print __('rebuild db'); ?></option>
+						<option value="rebuild cron"><?php print __('rebuild cron'); ?></option>
+						<option value="update counters"><?php print __('update counters'); ?></option>
+						<option value="suspend"><?php print __('suspend'); ?></option>
+						<option value="unsuspend"><?php print __('unsuspend'); ?></option>
+						<option value="delete"><?php print __('delete'); ?></option>
+					</select>
+
+				</div>
+
+				<div class="col-md-1">
+					<input type="submit" name="ok" value="Apply" class="submenu-button-select btn btn-default"/>
+				</div>
 			</div>
-		</div>
-		<br />
+			<br/>
 
 
 
@@ -97,9 +97,15 @@
 					$spnd_action = 'suspend';
 					$spnd_confirmation = 'SUSPEND_USER_CONFIRMATION';
 				}
+
+				$boxClass = ($status == "active") ? "info" : "danger";
 				?>
 
-				<div class="box box-default">
+				<div class="box box-<?= $boxClass ?>">
+					<div class="box-header">
+						<h3 class="box-title"><?=$key ?> <small>(<?=$status ?>)</small></h3>
+					</div>
+
 					<div class='box-body'>
 						<div class="row">
 							<div class="col-md-1">
@@ -278,6 +284,6 @@
 			<?php endforeach; ?>
 
 
-	</section>
-</div>
+		</section>
+	</div>
 </form>
