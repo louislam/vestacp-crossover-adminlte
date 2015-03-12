@@ -1,3 +1,13 @@
+<?php
+$formName = "v_add_ip";
+$title =  __('Adding IP address');
+$submitName = "ok";
+$submitButtonName =  __('Add');
+include_once "ip.php";
+?>
+
+
+
 <?
 require_once "func.php";
 $back = getBack("/list/TODO/");
