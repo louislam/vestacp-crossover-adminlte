@@ -59,7 +59,6 @@
 		</div>
 
 
-
 		<form action="/search/" method="get" class="sidebar-form">
 			<div class="input-group">
 				<input type="text" name="q" class="form-control" placeholder="Search..."/>
@@ -83,81 +82,83 @@
 				</ul>
 			</li>-->
 
-			<li class="<?php if($TAB == 'USER' ) echo 'active' ?>">
+			<li class="<?php if ($TAB == 'USER') echo 'active' ?>">
 				<a href="/list/user/">
-					<i class="fa fa-users"></i> <span> <?php print __('USER');?></span>
-					<small class="label pull-right bg-red"><? echo $panel[$user]['SUSPENDED_USERS']?></small>
+					<i class="fa fa-users"></i> <span> <?php print __('USER'); ?></span>
+					<small class="label pull-right bg-red"><? echo $panel[$user]['SUSPENDED_USERS'] ?></small>
 					<small class="label pull-right bg-green"><? echo $panel[$user]['U_USERS'] ?></small>
 				</a>
 			</li>
 
-			<li class="<?php if($TAB == 'WEB' ) echo 'active' ?>">
+			<li class="<?php if ($TAB == 'WEB') echo 'active' ?>">
 				<a href="/list/web/">
-					<i class="fa fa-circle"></i> <span> <?php print __('WEB');?></span>
-					<!--<small class="label pull-right bg-red"><? echo $panel[$user]['SUSPENDED_WEB']?></small>-->
-					<small class="label pull-right bg-light-blue"><? echo $panel[$user]['U_WEB_DOMAINS']?></small>
+					<i class="fa fa-circle"></i> <span> <?php print __('WEB'); ?></span>
+					<!--<small class="label pull-right bg-red"><? echo $panel[$user]['SUSPENDED_WEB'] ?></small>-->
+					<small class="label pull-right bg-light-blue"><? echo $panel[$user]['U_WEB_DOMAINS'] ?></small>
 				</a>
 			</li>
 
-			<li class="<?php if($TAB == 'DNS' ) echo 'active' ?>">
+			<li class="<?php if ($TAB == 'DNS') echo 'active' ?>">
 				<a href="/list/dns/">
-					<i class="fa fa-external-link-square"></i> <span> <?php print __('DNS');?></span>
-					<!--<small class="label pull-right bg-red"><? echo $panel[$user]['SUSPENDED_WEB']?></small>-->
-					<small class="label pull-right bg-light-blue"><? echo $panel[$user]['U_DNS_RECORDS']?></small>
+					<i class="fa fa-external-link-square"></i> <span> <?php print __('DNS'); ?></span>
+					<!--<small class="label pull-right bg-red"><? echo $panel[$user]['SUSPENDED_WEB'] ?></small>-->
+					<small class="label pull-right bg-light-blue"><? echo $panel[$user]['U_DNS_RECORDS'] ?></small>
 				</a>
 			</li>
 
-			<li class="<?php if($TAB == 'MAIL' ) echo 'active' ?>">
+			<li class="<?php if ($TAB == 'MAIL') echo 'active' ?>">
 				<a href="/list/mail/">
-					<i class="fa fa-envelope"></i> <span> <?php print __('MAIL');?></span>
-					<!--<small class="label pull-right bg-red"><? echo $panel[$user]['SUSPENDED_WEB']?></small>-->
-					<small class="label pull-right bg-light-blue"><? echo $panel[$user]['U_MAIL_ACCOUNTS']?></small>
+					<i class="fa fa-envelope"></i> <span> <?php print __('MAIL'); ?></span>
+					<!--<small class="label pull-right bg-red"><? echo $panel[$user]['SUSPENDED_WEB'] ?></small>-->
+					<small class="label pull-right bg-light-blue"><? echo $panel[$user]['U_MAIL_ACCOUNTS'] ?></small>
 				</a>
 			</li>
 
-			<li class="<?php if($TAB == 'DB' ) echo 'active' ?>">
+			<li class="<?php if ($TAB == 'DB') echo 'active' ?>">
 				<a href="/list/db/">
-					<i class="fa fa-hdd-o"></i> <span> <?php print __('DB');?></span>
-					<!--<small class="label pull-right bg-red"><? echo $panel[$user]['SUSPENDED_WEB']?></small>-->
-					<small class="label pull-right bg-light-blue"><? echo $panel[$user]['U_DATABASES']?></small>
+					<i class="fa fa-hdd-o"></i> <span> <?php print __('DB'); ?></span>
+					<!--<small class="label pull-right bg-red"><? echo $panel[$user]['SUSPENDED_WEB'] ?></small>-->
+					<small class="label pull-right bg-light-blue"><? echo $panel[$user]['U_DATABASES'] ?></small>
 				</a>
 			</li>
 
-			<li class="<?php if($TAB == 'CRON' ) echo 'active' ?>">
+			<li class="<?php if ($TAB == 'CRON') echo 'active' ?>">
 				<a href="/list/cron/">
-					<i class="fa fa-tasks"></i> <span> <?php print __('CRON');?></span>
-					<!--<small class="label pull-right bg-red"><? echo $panel[$user]['SUSPENDED_WEB']?></small>-->
-					<small class="label pull-right bg-light-blue"><? echo $panel[$user]['U_CRON_JOBS']?></small>
+					<i class="fa fa-tasks"></i> <span> <?php print __('CRON'); ?></span>
+					<!--<small class="label pull-right bg-red"><? echo $panel[$user]['SUSPENDED_WEB'] ?></small>-->
+					<small class="label pull-right bg-light-blue"><? echo $panel[$user]['U_CRON_JOBS'] ?></small>
 				</a>
 			</li>
 
-			<li class="<?php if($TAB == 'BACKUP' ) echo 'active' ?>">
+			<li class="<?php if ($TAB == 'BACKUP') echo 'active' ?>">
 				<a href="/list/backup/">
-					<i class="fa fa-cloud-download"></i> <span> <?php print __('BACKUP');?></span>
-					<!--<small class="label pull-right bg-red"><? echo $panel[$user]['SUSPENDED_WEB']?></small>-->
-					<small class="label pull-right bg-light-blue"><? echo $panel[$user]['U_BACKUPS']?></small>
+					<i class="fa fa-cloud-download"></i> <span> <?php print __('BACKUP'); ?></span>
+					<!--<small class="label pull-right bg-red"><? echo $panel[$user]['SUSPENDED_WEB'] ?></small>-->
+					<small class="label pull-right bg-light-blue"><? echo $panel[$user]['U_BACKUPS'] ?></small>
 				</a>
 			</li>
 
+			<? if (!isset($isNormalUser)) : ?>
+				<li class="active treeview">
+					<a href="#">
+						<i class="fa fa-files-o"></i>
+						<span>Super Admin</span>
+					</a>
+					<ul class="treeview-menu">
+						<li class="<?php if ($TAB == 'PACKAGE') echo 'active' ?>"><a href="/list/package/"><i class="fa fa-circle-o"></i> <?php print __('Packages') ?> </a></li>
+						<li class="<?php if ($TAB == 'IP') echo 'active' ?>"><a href="/list/ip/"><i class="fa fa-circle-o"></i> <?php print __('IP') ?> </a></li>
+						<li class="<?php if ($TAB == 'RRD') echo 'active' ?>"><a href="/list/rrd/"><i class="fa fa-circle-o"></i> <?php print __('Graphs') ?> </a></li>
+						<li class="<?php if ($TAB == 'STATS') echo 'active' ?>"><a href="/list/stats/"><i class="fa fa-circle-o"></i> <?php print __('Statistics') ?> </a></li>
+						<li class="<?php if ($TAB == 'LOG') echo 'active' ?>"><a href="/list/log/"><i class="fa fa-circle-o"></i> <?php print __('Log') ?> </a></li>
+						<li class="<?php if ($TAB == 'SERVICES') echo 'active' ?>"><a href="/list/services/"><i class="fa fa-circle-o"></i> <?php print __('Services') ?> </a></li>
+						<?php if (!empty($_SESSION['FIREWALL_SYSTEM'])) { ?>
+							<li class="<?php if ($TAB == 'FIREWALL') echo 'active' ?>"><a href="/list/firewall/"><i class="fa fa-circle-o"></i> <?php print __('Firewall') ?> </a></li>
+						<?php } ?>
+						<li class="<?php if ($TAB == 'UPDATES') echo 'active' ?>"><a href="/list/updates/"><i class="fa fa-circle-o"></i> <?php print __('Updates') ?> </a></li>
+					</ul>
+				</li>
+			<? endif; ?>
 
-			<li class="active treeview">
-				<a href="#">
-					<i class="fa fa-files-o"></i>
-					<span>Super Admin</span>
-				</a>
-				<ul class="treeview-menu">
-					<li class="<?php if($TAB == 'PACKAGE' ) echo 'active' ?>"><a href="/list/package/"><i class="fa fa-circle-o"></i> <?php print __('Packages') ?> </a></li>
-					<li class="<?php if($TAB == 'IP' ) echo 'active' ?>"><a href="/list/ip/"><i class="fa fa-circle-o"></i> <?php print __('IP') ?> </a></li>
-					<li class="<?php if($TAB == 'RRD' ) echo 'active' ?>"><a href="/list/rrd/"><i class="fa fa-circle-o"></i> <?php print __('Graphs') ?> </a></li>
-					<li class="<?php if($TAB == 'STATS' ) echo 'active' ?>"><a href="/list/stats/"><i class="fa fa-circle-o"></i> <?php print __('Statistics') ?> </a></li>
-					<li class="<?php if($TAB == 'LOG' ) echo 'active' ?>"><a href="/list/log/"><i class="fa fa-circle-o"></i> <?php print __('Log') ?> </a></li>
-					<li class="<?php if($TAB == 'SERVICES' ) echo 'active' ?>"><a href="/list/services/"><i class="fa fa-circle-o"></i> <?php print __('Services') ?> </a></li>
-					<?php if(!empty($_SESSION['FIREWALL_SYSTEM'])) { ?>
-					<li class="<?php if($TAB == 'FIREWALL' ) echo 'active' ?>"><a href="/list/firewall/"><i class="fa fa-circle-o"></i> <?php print __('Firewall') ?> </a></li>
-					<?php } ?>
-					<li class="<?php if($TAB == 'UPDATES' ) echo 'active' ?>"><a href="/list/updates/"><i class="fa fa-circle-o"></i> <?php print __('Updates') ?> </a></li>
-				</ul>
-			</li>
 
 		</ul>
 	</section>
