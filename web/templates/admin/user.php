@@ -57,19 +57,35 @@ $back = getBack("/list/web/");
 							<div class="form-group">
 								<label for="package"><?php print __('Package'); ?></label>
 								<select id="package" class="vst-list form-control" name="v_package">
-									<?php
-									foreach ($data as $key => $value) {
-										echo "\n\t\t\t\t\t\t\t\t\t\t\t\t\t<option value=\"" . $key . "\"";
-										if ((!empty($v_package)) && ($key == $_POST['v_package'])) {
-											echo 'selected';
-										} else {
-											if ($key == 'default') {
-												echo 'selected';
+
+
+									<? if (isEditPage($formName)) : ?>
+										<?php
+										foreach ($packages as $key => $value) {
+											echo "\n\t\t\t\t\t\t\t\t\t<option value=\"".$key."\"";
+											$skey = "'".$key."'";
+											if (( $key == $v_package ) || ( $skey == $v_package)){
+												echo 'selected' ;
 											}
+											echo ">".$key."</option>\n";
 										}
-										echo ">" . $key . "</option>\n";
-									}
-									?>
+										?>
+										<? else : ?>
+										<?php
+										foreach ($data as $key => $value) {
+											echo "\n\t\t\t\t\t\t\t\t\t\t\t\t\t<option value=\"" . $key . "\"";
+											if ((!empty($v_package)) && ($key == $_POST['v_package'])) {
+												echo 'selected';
+											} else {
+												if ($key == 'default') {
+													echo 'selected';
+												}
+											}
+											echo ">" . $key . "</option>\n";
+										}
+										?>
+									<? endif; ?>
+
 								</select>
 							</div>
 
