@@ -138,16 +138,17 @@
 						<li class="<?php if ($TAB == 'IP') echo 'active' ?>"><a href="/list/ip/"><i class="fa fa-circle-o"></i> <?php print __('IP') ?> </a></li>
 						<li class="<?php if ($TAB == 'RRD') echo 'active' ?>"><a href="/list/rrd/"><i class="fa fa-circle-o"></i> <?php print __('Graphs') ?> </a></li>
 
+					<? endif; ?>
+
+					<li class="<?php if ($TAB == 'STATS') echo 'active' ?>"><a href="/list/stats/"><i class="fa fa-circle-o"></i> <?php print __('Statistics') ?> </a></li>
+					<li class="<?php if ($TAB == 'LOG') echo 'active' ?>"><a href="/list/log/"><i class="fa fa-circle-o"></i> <?php print __('Log') ?> </a></li>
+
+					<? if (!isset($isNormalUser)) : ?>
 						<li class="<?php if ($TAB == 'SERVICES') echo 'active' ?>"><a href="/list/services/"><i class="fa fa-circle-o"></i> <?php print __('Services') ?> </a></li>
 						<?php if (!empty($_SESSION['FIREWALL_SYSTEM'])) { ?>
 							<li class="<?php if ($TAB == 'FIREWALL') echo 'active' ?>"><a href="/list/firewall/"><i class="fa fa-circle-o"></i> <?php print __('Firewall') ?> </a></li>
 						<?php } ?>
 						<li class="<?php if ($TAB == 'UPDATES') echo 'active' ?>"><a href="/list/updates/"><i class="fa fa-circle-o"></i> <?php print __('Updates') ?> </a></li>
-
-					<? else : ?>
-						<li class="<?php if ($TAB == 'STATS') echo 'active' ?>"><a href="/list/stats/"><i class="fa fa-circle-o"></i> <?php print __('Statistics') ?> </a></li>
-						<li class="<?php if ($TAB == 'LOG') echo 'active' ?>"><a href="/list/log/"><i class="fa fa-circle-o"></i> <?php print __('Log') ?> </a></li>
-
 					<? endif; ?>
 
 				</ul>
