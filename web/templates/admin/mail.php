@@ -88,14 +88,18 @@ $back = getBack("/list/mail/");
 
 							</div>
 
-							<div class="form-group">
-								<label>
-									<?php print __('Catchall email');?>
+							<? if (isEditPage($formName)) : ?>
 
-								</label>
-								<input type="text" class="vst-input form-control" name="v_catchall" <?php if (!empty($v_catchall)) echo "value=".$v_catchall;  ?> >
+								<div class="form-group">
+									<label>
+										<?php print __('Catchall email');?>
 
-							</div>
+									</label>
+									<input type="text" class="vst-input form-control" name="v_catchall" <?php if (!empty($v_catchall)) echo "value=".$v_catchall;  ?> >
+
+								</div>
+							<? endif; ?>
+
 
 						</div>
 
