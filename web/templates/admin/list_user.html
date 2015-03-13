@@ -234,6 +234,36 @@
 
 								<?php if ($key == $user) : ?>
 									<a class="btn btn-default" href="/logout"><?php print __('logout'); ?></a>
+
+
+								<?php
+								// Login as user alert dialog
+								if (!empty($_SESSION['look_alert'])) : ?>
+									<div class="modal modal-success" id="login-as-msg-modal">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+													<h4 class="modal-title"><?php print __('Welcome') ?></h4>
+												</div>
+												<div class="modal-body">
+													<p><?php print __('LOGGED_IN_AS', $key); ?></p>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-outline pull-right" data-dismiss="modal"><?php echo __('OK') ?></button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<script>
+										$(document).ready(function () {
+											$("#login-as-msg-modal").modal("show");
+										});
+									</script>
+
+									<?php unset($_SESSION['look_alert']); ?>
+								<? endif ?>
+
 								<?php else : ?>
 									<a class="btn btn-default" href="/login/?loginas=<?php echo $key; ?>"><?php print __('login as') . " " . $key; ?></a>
 								<?php endif; ?>

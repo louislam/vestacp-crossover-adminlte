@@ -41,8 +41,8 @@
 <script>
 	// Destroy the default error dialog
 	$(document).ready(function () {
-		$( "#dialog-message" ).dialog("destroy");
-		$( "#dialog-message").remove();
+		$("#dialog-message").dialog("destroy");
+		$("#dialog-message").remove();
 	});
 </script>
 
