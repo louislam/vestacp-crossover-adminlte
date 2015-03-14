@@ -80,8 +80,16 @@ $back = getBack("/list/dns/?domain=" . $v_domain);
 								<label>
 									<?php print __('Record');?>
 								</label>
-								<input type="text"  class="vst-input form-control" name="v_rec" <?php if (!empty($v_rec)) echo "value=".$v_rec; ?>>
-								<small class="hint"></small>
+								<input type="text"  class="vst-input form-control" name="v_rec" <?php if (!empty($v_rec)) echo "value=".$v_rec; ?> <? editDisabled($formName) ?>>
+
+								<? if (isEditPage($formName)) : ?>
+									<input type="hidden" name="v_record_id" <?php if (!empty($v_record_id)) echo "value=".$v_record_id; ?>>
+									<? else : ?>
+
+									<small class="hint"></small>
+								<? endif; ?>
+
+
 							</div>
 
 							<div class="form-group">
@@ -89,27 +97,37 @@ $back = getBack("/list/dns/?domain=" . $v_domain);
 									<?php print __('Type');?>
 								</label>
 
-								<select class="vst-list form-control" name="v_type">
-									<option value="A" <?php if ($v_type == 'A') echo selected; ?>>A</option>
-									<option value="AAAA" <?php if ($v_type == 'AAAA') echo selected; ?>>AAAA</option>
-									<option value="NS" <?php if ($v_type == 'NS') echo selected; ?>>NS</option>
-									<option value="CNAME" <?php if ($v_type == 'CNAME') echo selected; ?>>CNAME</option>
-									<option value="MX" <?php if ($v_type == 'MX') echo selected; ?>>MX</option>
-									<option value="TXT" <?php if ($v_type == 'TXT') echo selected; ?>>TXT</option>
-									<option value="SRV" <?php if ($v_type == 'SRV') echo selected; ?>>SRV</option>
-									<option value="DNSKEY" <?php if ($v_type == 'DNSKEY') echo selected; ?>>DNSKEY</option>
-									<option value="KEY" <?php if ($v_type == 'KEY') echo selected; ?>>KEY</option>
-									<option value="IPSECKEY" <?php if ($v_type == 'IPSECKEY') echo selected; ?>>IPSECKEY</option>
-									<option value="PTR" <?php if ($v_type == 'PTR') echo selected; ?>>PTR</option>
-									<option value="SPF" <?php if ($v_type == 'SPF') echo selected; ?>>SPF</option>
-								</select>
+								<? if (isEditPage($formName)) : ?>
+									<input type="text" class="vst-input form-control" name="v_type" <?php if (!empty($v_rec)) echo "value=".$v_type; ?> disabled>
+
+								<? else : ?>
+									<select class="vst-list form-control" name="v_type">
+										<option value="A" <?php if ($v_type == 'A') echo selected; ?>>A</option>
+										<option value="AAAA" <?php if ($v_type == 'AAAA') echo selected; ?>>AAAA</option>
+										<option value="NS" <?php if ($v_type == 'NS') echo selected; ?>>NS</option>
+										<option value="CNAME" <?php if ($v_type == 'CNAME') echo selected; ?>>CNAME</option>
+										<option value="MX" <?php if ($v_type == 'MX') echo selected; ?>>MX</option>
+										<option value="TXT" <?php if ($v_type == 'TXT') echo selected; ?>>TXT</option>
+										<option value="SRV" <?php if ($v_type == 'SRV') echo selected; ?>>SRV</option>
+										<option value="DNSKEY" <?php if ($v_type == 'DNSKEY') echo selected; ?>>DNSKEY</option>
+										<option value="KEY" <?php if ($v_type == 'KEY') echo selected; ?>>KEY</option>
+										<option value="IPSECKEY" <?php if ($v_type == 'IPSECKEY') echo selected; ?>>IPSECKEY</option>
+										<option value="PTR" <?php if ($v_type == 'PTR') echo selected; ?>>PTR</option>
+										<option value="SPF" <?php if ($v_type == 'SPF') echo selected; ?>>SPF</option>
+									</select>
+								<? endif; ?>
+
+
+
+
+
 							</div>
 
 							<div class="form-group">
 								<label>
 									<?php print __('IP or Value');?>
 								</label>
-								<input type="text"  class="vst-input form-control" name="v_val" <?php if (!empty($v_val)) echo "value=".$v_val; ?>>
+								<input type="text"  class="vst-input form-control" name="v_val"  <?php if (!empty($v_val)) echo "value='".$v_val."'"; ?>>
 
 							</div>
 
@@ -120,6 +138,14 @@ $back = getBack("/list/dns/?domain=" . $v_domain);
 								<input type="text"  class="vst-input form-control" name="v_priority" <?php if (!empty($v_priority)) echo "value=".$v_priority; ?>>
 
 							</div>
+
+							<? if (isEditPage($formName)) : ?>
+							<label>
+								<?php print __('Record Number');?> <span style="padding:0 0 0 6px; font-size: 10pt; color:#555;">(<?php print __('internal');?>)</span>
+							</label>
+								<input type="text"  class="vst-input form-control" name="v_record_id" <?php if (!empty($v_record_id)) echo "value=".$v_record_id; ?>>
+
+							<? endif; ?>
 
 
 
