@@ -165,7 +165,9 @@ $back = getBack("/list/dns/?domain=" . $v_domain);
 </form>
 
 
-<script type="text/javascript">
-	GLOBAL.DNS_REC_PREFIX = '<?php echo $_GET['domain']; ?>';
-</script>
-<script type="text/javascript" src="/js/pages/add.dns.record.js"></script>
+<? if (! isEditPage($formName)) : ?>
+	<script type="text/javascript">
+		GLOBAL.DNS_REC_PREFIX = '<?php echo $_GET['domain']; ?>';
+	</script>
+	<script type="text/javascript" src="/js/pages/add.dns.record.js"></script>
+<? endif; ?>
