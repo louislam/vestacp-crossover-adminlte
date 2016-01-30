@@ -1,0 +1,17 @@
+{
+    "name": "louislam/vestacp-crossover-adminlte",
+    "description": "",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Louis Lam",
+            "email": "info@louislam.net"
+        }
+    ],
+    "require": {
+        "slim/slim": "2.6.2",
+        "league/plates": "3.1.1",
+        "almasaeed2010/adminlte": "2.1.1"
+    }
+}
