@@ -4,9 +4,11 @@
 
 Still work in progress, do not try it on any production server. Currently it is a INCOMPLETE theme.
 
+## Changelog
 
-## Requirement
-Currrently target for the version of	0.9.8 Release:12.
+### 2016-05-06
+Inject the theme using Javascript instead of modifiying all html and files. 
+
 
 ## Installation
 1. Backup /usr/local/vesta/web/.
