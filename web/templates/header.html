@@ -1,49 +1,82 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title><?php echo "$TAB"; ?> - Vesta Control Panel</title>
-	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-	<!-- Bootstrap 3.3.2 -->
-	<link href="/adminlte/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<!-- FontAwesome 4.3.0 -->
-	<link href="/adminlte/plugins/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-	<!-- Ionicons 2.0.0 -->
-	<!--<link href="/adminlte/plugins/ionicons-2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />-->
-	<!-- Theme style -->
-	<link href="/adminlte/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-	<!-- AdminLTE Skins. Choose a skin from the css/skins
-		 folder instead of downloading all of them to reduce the load. -->
-	<link href="/adminlte/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-	<link href="/adminlte/dist/css/skins/skin-orange.css" rel="stylesheet" type="text/css" />
-	<!-- iCheck -->
-	<link href="/adminlte/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
-	<!-- Morris chart -->
-	<link href="/adminlte/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
-	<!-- jvectormap -->
-	<link href="/adminlte/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-	<!-- Date Picker -->
-	<link href="/adminlte/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
-	<!-- Daterange picker -->
-	<link href="/adminlte/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
-	<!-- bootstrap wysihtml5 - text editor -->
-	<link href="/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+  <title>Vesta - <?="$TAB"?> </title>
 
-	<link href="/adminlte/dist/css/louis.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="/css/styles.min.css?1446554103">
 
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-	<script src="/adminlte/plugins/html5shiv.js"></script>
-	<script src="/adminlte/plugins/respond.min.js"></script>
-	<![endif]-->
+    <!-- AdminLTE Start -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/css/AdminLTE.min.css" />
+    <link rel="stylesheet" type="text/css" href="/adminlte/css/main.css?1446554" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/js/app.min.js"></script>
+    <script src="/adminlte/js/app.js"></script>
+    <!-- AdminLTE End -->
 
-	<!-- jQuery 2.1.3 -->
-	<script src="/adminlte/plugins/jQuery/jQuery-2.1.3.min.js"></script>
+  <link type="text/css" href="/css/jquery-custom-dialogs.css?1446554103" rel="stylesheet" />
+    <!-- jQuery too old, comment out this -->
+  <!--<script type="text/javascript" src="/js/jquery-1.7.2.min.js?1446554103"></script>-->
+  <script type="text/javascript" src="/js/jquery.cookie.js?1446554103"></script>
+  <script type="text/javascript" src="/js/jquery-ui-1.8.20.custom.min.js?1446554103"></script>
+  <script type="text/javascript" src="/js/hotkeys.js?1446554103"></script>
+  <script type="text/javascript" src="/js/events.js?1446554103"></script>
 
-	<script type="text/javascript" src="/js/events.js"></script>
-	<script type="text/javascript" src="/js/app.js"></script>
-	<script type="text/javascript" src="/js/templates.js"></script>
+  <script language="text/javascript" type="text/javascript">
+    var checked = false;
+    var frmname = '';
+
+    function checkedAll(frmname) {
+        if ($('.l-unit.selected').length > 0) {
+            $('.l-unit').removeClass("selected");
+            $('.ch-toggle').attr("checked", false);
+            $('.toggle-all').removeClass('clicked-on');
+        }
+        else {
+            $('.l-unit').addClass("selected");
+            $('.ch-toggle').attr("checked", true);
+            $('.toggle-all').addClass('clicked-on');
+        }
+    }
+
+    function doSearch(url) {
+        var url = url || '/search/';
+        var loc = url + '?q=' + $('.search-input').val();
+
+        location.href = loc;
+        return false;
+    }
+
+    $(document).ready(function(){
+        if($('.body-login')[0]){
+          $('input').first().focus();
+        }
+
+        $(".submenu-select-dropdown").each(function(){
+            $(this).wrap("<span class='submenu-select-wrapper'></span>");
+            $(this).after("<span class='holder'></span>");
+        });
+        $(".submenu-select-dropdown").change(function(){
+            var selectedOption = $(this).find(":selected").text();
+            $(this).next(".holder").text(selectedOption);
+        }).trigger('change');
+        $('.to-top').bind('click', function(evt) {
+            $("html, body").animate({ scrollTop: 0 }, "normal");
+        });
+    })
+
+  </script>
+
+
+  <script type="text/javascript" src="/js/app.js?1446554103"></script>
+  <script type="text/javascript" src="/js/templates.js?1446554103"></script>
+  <!-- script type="text/javascript" src="/js/i18n.js.php"></script -->
+
+
 </head>
-<body>
-	<div class="wrapper">
+<body class="body-<?=strtolower($TAB)?> lang-<?=$_SESSION['language']?>">
