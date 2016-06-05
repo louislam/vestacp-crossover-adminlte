@@ -4,7 +4,7 @@
 
 Still work in progress, do not try it on any production server. Currently it is a INCOMPLETE theme.
 
-## Changelog
+## News
 
 ### 2016-05-06
 Inject the theme using Javascript instead of modifiying all html and files. 
