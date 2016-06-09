@@ -54,6 +54,11 @@ body {
     font-size: 20px;
 }
 
+.l-unit {
+    white-space: nowrap;
+    padding-bottom: 10px;
+}
+
 .l-unit .l-icon-star {
     display: inline-block;
 }
@@ -69,8 +74,19 @@ body {
 
 .l-unit.selected {
     border-left: 2px solid #feef9a;
+    border-bottom: 1px solid #f4e387 !important;
 }
 
 .l-unit .l-unit-toolbar__col--right {
-    display: none !important;
+  //  display: none !important;
+}
+
+.l-unit__ip {
+    margin-bottom: 0;
+}
+
+.l-sort-toolbar .sort-by b {
+    text-transform: capitalize;
+    font-size: inherit;
+    font-weight: normal;
 }

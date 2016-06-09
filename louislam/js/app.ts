@@ -84,20 +84,25 @@ class LouisAdminLTE {
             sidebarMenu.append('<li class="treeview"><a href="#"><i class="fa fa-files-o"></i><span>Admin</span></a><ul class="treeview-menu admin-menu"></ul></li>');
 
             $(".l-menu__item a").each(function () {
-                var item = $("<li><a><i class=\"fa\"></i></a></li>");
+                var item = $("<li><a><i class=\"fa\"></i><span></span></a></li>");
                 var a = item.find("a");
                 a.attr("href", $(this).attr("href"));
 
                 var name = $(this).text();
 
                 if (name == "User") {
-                    item.find(".fa").addClass("fa-user");
-                    a.append(name);
+
                 } else {
                     item.find(".fa").addClass("fa-circle-o");
-                    a.append(name);
+                    a.find("span").append(name);
                 }
 
+                console.log($(this).parent());
+
+                if ($(this).parent().hasClass("l-menu__item--active")) {
+                    item.addClass("active");
+                    activeItem = item;
+                }
 
                 $(".admin-menu").append(item);
             });
@@ -117,12 +122,15 @@ class LouisAdminLTE {
             contentSection.html(row);
             row.html(col);
             col.html(box);
-            box.find('.box-header').text(activeItem.find("span").text());
+
+            if (activeItem != null)
+                box.find('.box-header').text(activeItem.find("span").text());
 
             units.before(contentSection);
             box.find(".box-body").html(units);
+            box.find(".box-footer").html($(".data-count"));
 
-            $(".l-icon-shortcuts, .l-icon-to-top, .l-unit__stats, .l-unit__date").hide();
+            $(".l-icon-shortcuts, .l-icon-to-top, .l-unit__stats, .l-unit__date, .l-sort-toolbar__search-box").hide();
         });
 
         // For each Row
@@ -135,10 +143,19 @@ class LouisAdminLTE {
            $(this).append(row);
 
             // Action Panel
-            var actionPanel = $(this).find(".actions-panel").hide();
-            var btnGroup = $('<div class="btn-group action-btn-group"><button type="button" class="btn btn-default btn-flat">Action</button><button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown"> ' +
-                '<span class="caret"></span> <span class="sr-only">Toggle Dropdown</span> </button><ul class="dropdown-menu" role="menu"></ul></div>');
-            row.find(".right").append(btnGroup);
+            //var actionPanel = $(this).find(".actions-panel");
+            var actionButtons = $(this).find(".actions-panel__col");
+
+            if (actionButtons.size() > 0) {
+                var btnGroup = $('<div class="btn-group action-btn-group"><button type="button" class="btn btn-default btn-flat">Action</button><button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown"> ' +
+                    '<span class="caret"></span> <span class="sr-only">Toggle Dropdown</span> </button><ul class="dropdown-menu" role="menu"></ul></div>');
+                row.find(".right").append(btnGroup);
+
+                actionButtons.each(function () {
+
+                });
+            }
+
         });
 
 

@@ -46,6 +46,10 @@ body {
 .l-unit__name {
   font-size: 20px;
 }
+.l-unit {
+  white-space: nowrap;
+  padding-bottom: 10px;
+}
 .l-unit .l-icon-star {
   display: inline-block;
 }
@@ -58,9 +62,15 @@ body {
 }
 .l-unit.selected {
   border-left: 2px solid #feef9a;
+  border-bottom: 1px solid #f4e387 !important;
 }
-.l-unit .l-unit-toolbar__col--right {
-  display: none !important;
+.l-unit__ip {
+  margin-bottom: 0;
+}
+.l-sort-toolbar .sort-by b {
+  text-transform: capitalize;
+  font-size: inherit;
+  font-weight: normal;
 }
 body {
   display: none;
@@ -70,13 +80,13 @@ body {
   padding: 0;
 }
 .action-btn-group {
-  margin-left: 50px;
+  margin-left: 137px;
   margin-bottom: 10px;
   margin-top: 10px;
 }
 @media (min-width: 768px) {
   .action-btn-group {
-    margin: 14px 20px 0 0;
+    margin: 5px 20px 0 0;
     float: right;
   }
 }
