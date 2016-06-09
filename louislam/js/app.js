@@ -21,6 +21,7 @@ var LouisAdminLTE = (function () {
             var sidebar = template.find(".main-sidebar");
             var sidebarMenu = sidebar.find(".sidebar-menu");
             var header = template.find(".main-header");
+            var activeItem = null;
             wrapper.prepend(header);
             wrapper.prepend(sidebar);
             header.find(".username").text($(".l-profile__username").text());
@@ -34,6 +35,7 @@ var LouisAdminLTE = (function () {
                 var item = $("<li><a href=''><i class='fa'></i> <span></span><small class='label pull-right  bg-green'>new</small></li>");
                 if ($(this).hasClass("l-stat__col--active")) {
                     item.addClass("active");
+                    activeItem = item;
                 }
                 item.find("a").attr("href", url);
                 item.find(".label").text(number);
@@ -52,6 +54,10 @@ var LouisAdminLTE = (function () {
                 else if (url == "/list/mail/") {
                     item.find(".fa").addClass("fa-envelope");
                     item.find("span").text(name);
+                }
+                else if (url == "/list/db/") {
+                    item.find(".fa").addClass("fa-database");
+                    item.find("span").text(name.replace("Db", "Database"));
                 }
                 else {
                     item.find(".fa").addClass("fa-th");
@@ -82,15 +88,16 @@ var LouisAdminLTE = (function () {
             // Add Box to Listing
             var contentSection = $('<section class="content"></section>');
             var row = $("<div class='row' />");
-            var col = $("<div class='col-xs-12 col-lg-7' />");
-            var box = $("<div class='box'><div class='box-header'></div><div class='box-body'></div><div class='box-footer'></div></div>");
+            var col = $("<div class='col-xs-12 col-lg-11' />");
+            var box = $("<div class='box-list box'><div class='box-header with-border'></div><div class='box-body'></div><div class='box-footer'></div></div>");
             var units = $(".units");
             contentSection.html(row);
             row.html(col);
             col.html(box);
+            box.find('.box-header').text(activeItem.find("span").text());
             units.before(contentSection);
-            box.html(units);
-            $(".l-icon-shortcuts, .l-icon-to-top").hide();
+            box.find(".box-body").html(units);
+            $(".l-icon-shortcuts, .l-icon-to-top, .l-unit__stats, .l-unit__date").hide();
         });
     };
     LouisAdminLTE.ucFirst = function (str) {

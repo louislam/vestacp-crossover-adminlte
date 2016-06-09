@@ -30,6 +30,7 @@ class LouisAdminLTE {
             var sidebar = template.find(".main-sidebar");
             var sidebarMenu = sidebar.find(".sidebar-menu");
             var header = template.find(".main-header");
+            var activeItem = null;
 
             wrapper.prepend(header);
             wrapper.prepend(sidebar);
@@ -48,6 +49,7 @@ class LouisAdminLTE {
 
                 if ($(this).hasClass("l-stat__col--active")) {
                     item.addClass("active");
+                    activeItem = item;
                 }
 
                 item.find("a").attr("href", url);
@@ -65,6 +67,9 @@ class LouisAdminLTE {
                 } else if (url == "/list/mail/") {
                     item.find(".fa").addClass("fa-envelope");
                     item.find("span").text(name);
+                } else if (url == "/list/db/") {
+                    item.find(".fa").addClass("fa-database");
+                    item.find("span").text(name.replace("Db", "Database"));
                 } else {
                     item.find(".fa").addClass("fa-th");
                     item.find("span").text(name);
@@ -106,17 +111,18 @@ class LouisAdminLTE {
             // Add Box to Listing
             var contentSection = $('<section class="content"></section>');
             var row = $("<div class='row' />");
-            var col = $("<div class='col-xs-12 col-lg-7' />");
-            var box = $("<div class='box'><div class='box-header'></div><div class='box-body'></div><div class='box-footer'></div></div>");
+            var col = $("<div class='col-xs-12 col-lg-11' />");
+            var box = $("<div class='box-list box'><div class='box-header with-border'></div><div class='box-body'></div><div class='box-footer'></div></div>");
             var units = $(".units");
             contentSection.html(row);
             row.html(col);
             col.html(box);
+            box.find('.box-header').text(activeItem.find("span").text());
 
             units.before(contentSection);
-            box.html(units);
+            box.find(".box-body").html(units);
 
-            $(".l-icon-shortcuts, .l-icon-to-top").hide();
+            $(".l-icon-shortcuts, .l-icon-to-top, .l-unit__stats, .l-unit__date").hide();
         });
 
 
