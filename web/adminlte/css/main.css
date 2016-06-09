@@ -9,6 +9,27 @@ strong {
   font-weight: bold;
   color: inherit !important;
 }
+.l-center {
+  margin: 0 !important;
+  width: 100%;
+  max-width: none;
+}
+.l-content > .l-center .l-unit:nth-of-type(1) {
+  padding-top: 0;
+}
+.l-sort-toolbar {
+  background-color: #e6ebf1;
+}
+form#vstobjects {
+  padding-top: 0;
+}
+.wrapper {
+  background-color: #ecf0f5 !important;
+}
+body {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 400 !important;
+}
 body {
   display: none;
   background-color: #ecf0f5;

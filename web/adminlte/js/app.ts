@@ -18,7 +18,7 @@ class LouisAdminLTE {
         body.addClass("skin-blue sidebar-mini");
 
         // Wrap All Content first
-        body.wrapInner('<div class="content-wrapper" />');
+        body.wrapInner('<div class="content-wrapper"></div>');
  
         body.wrapInner('<div class="wrapper" />');
         wrapper = $(".wrapper");
@@ -42,36 +42,81 @@ class LouisAdminLTE {
             $(".l-stat .l-stat__col").each(function () {
                 var name = LouisAdminLTE.ucFirst($(this).find(".l-stat__col-title").text());
                 var url = $(this).find("a").attr("href");
-                var number = LouisAdminLTE.ucFirst($(this).find("ul li:first-child").text());
+                var number = LouisAdminLTE.ucFirst($(this).find("ul li:first-child span").text());
 
-                var item = $("<li><a href=''><i class='fa fa-th'></i> <span></span><small class='label pull-right  bg-green'>new</small></li>");
+                var item = $("<li><a href=''><i class='fa'></i> <span></span><small class='label pull-right  bg-green'>new</small></li>");
 
                 if ($(this).hasClass("l-stat__col--active")) {
                     item.addClass("active");
                 }
 
-                item.find("span").text(name);
                 item.find("a").attr("href", url);
                 item.find(".label").text(number);
+
+                if (url == "/list/user/") {
+                    item.find(".fa").addClass("fa-user");
+                    item.find("span").text(name);
+                } else if (url == "/list/web/") {
+                    item.find(".fa").addClass("fa-server");
+                    item.find("span").text(name);
+                } else if (url == "/list/dns/") {
+                    item.find(".fa").addClass("fa-share-square-o");
+                    item.find("span").text(name.replace("Dns", "DNS"));
+                } else if (url == "/list/mail/") {
+                    item.find(".fa").addClass("fa-envelope");
+                    item.find("span").text(name);
+                } else {
+                    item.find(".fa").addClass("fa-th");
+                    item.find("span").text(name);
+                }
+
+
 
                 sidebarMenu.append(item);
             });
 
             // Admin Menu
-            sidebarMenu.append('<li class="treeview active"><a href="#"><i class="fa fa-files-o"></i><span>Admin</span></a><ul class="treeview-menu admin-menu"></ul></li>');
+            sidebarMenu.append('<li class="treeview"><a href="#"><i class="fa fa-files-o"></i><span>Admin</span></a><ul class="treeview-menu admin-menu"></ul></li>');
 
             $(".l-menu__item a").each(function () {
-                var item = $("<li><a><i class=\"fa fa-circle-o\"></i></a></li>");
+                var item = $("<li><a><i class=\"fa\"></i></a></li>");
                 var a = item.find("a");
                 a.attr("href", $(this).attr("href"));
-                a.append($(this).text());
+
+                var name = $(this).text();
+
+                if (name == "User") {
+                    item.find(".fa").addClass("fa-user");
+                    a.append(name);
+                } else {
+                    item.find(".fa").addClass("fa-circle-o");
+                    a.append(name);
+                }
+
 
                 $(".admin-menu").append(item);
             });
 
 
-            $(".l-stat, .l-header").hide(); 
+            $(".l-stat, .l-header").hide();
 
+            $(".l-separator").remove();
+            $(".l-sort").removeClass("l-sort").css("margin-top", 0);
+
+            // Add Box to Listing
+            var contentSection = $('<section class="content"></section>');
+            var row = $("<div class='row' />");
+            var col = $("<div class='col-xs-12 col-md-7' />");
+            var box = $("<div class='box'><div class='box-header'></div><div class='box-body'></div><div class='box-footer'></div></div>");
+            var units = $(".units");
+            contentSection.html(row);
+            row.html(col);
+            col.html(box);
+
+            units.before(contentSection);
+            box.html(units);
+
+            $(".l-icon-shortcuts, .l-icon-to-top").hide();
         });
 
 
