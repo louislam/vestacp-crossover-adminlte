@@ -112,7 +112,7 @@ class LouisAdminLTE {
             var contentSection = $('<section class="content"></section>');
             var row = $("<div class='row' />");
             var col = $("<div class='col-xs-12 col-lg-11' />");
-            var box = $("<div class='box-list box'><div class='box-header with-border'></div><div class='box-body'></div><div class='box-footer'></div></div>");
+            var box = $("<div class='box-list box-info box'><div class='box-header with-border'></div><div class='box-body'></div><div class='box-footer'></div></div>");
             var units = $(".units");
             contentSection.html(row);
             row.html(col);
@@ -124,6 +124,24 @@ class LouisAdminLTE {
 
             $(".l-icon-shortcuts, .l-icon-to-top, .l-unit__stats, .l-unit__date").hide();
         });
+
+        // For each Row
+        $(".units .l-unit").each(function () {
+
+            var row = $("<div class='row'><div class='col-xs-12 col-sm-8 left'></div><div class='col-xs-12 col-sm-4 right'></div></div>");
+            row.find(".left").append($(this).find(".l-unit-toolbar"));
+            row.find(".left").append($(this).find(".l-unit__col--left"));
+            row.find(".left").append($(this).find(".l-unit__col--right"));
+           $(this).append(row);
+
+            // Action Panel
+            var actionPanel = $(this).find(".actions-panel").hide();
+            var btnGroup = $('<div class="btn-group action-btn-group"><button type="button" class="btn btn-default btn-flat">Action</button><button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown"> ' +
+                '<span class="caret"></span> <span class="sr-only">Toggle Dropdown</span> </button><ul class="dropdown-menu" role="menu"></ul></div>');
+            row.find(".right").append(btnGroup);
+        });
+
+
 
 
     }

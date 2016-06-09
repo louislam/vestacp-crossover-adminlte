@@ -31,9 +31,7 @@ body {
 }
 
 .l-unit-toolbar {
-    position: absolute;
-    width: 100%;
-    z-index: 0;
+
 }
 
 .units .l-unit {
@@ -46,12 +44,33 @@ body {
     margin-bottom: -3px;
 }
 
-.l-unit__col--left {
+.check-label, .sort-by {
+    text-transform: capitalize;
+    font-weight: normal;
 
 }
 
-.l-icon-star {
-
+.l-unit__name {
+    font-size: 20px;
 }
 
+.l-unit .l-icon-star {
+    display: inline-block;
+}
 
+.l-unit-toolbar {
+    height: 39px;
+    float: left;
+}
+
+.l-unit-toolbar__col--left {
+    padding-top: 11px;
+}
+
+.l-unit.selected {
+    border-left: 2px solid #feef9a;
+}
+
+.l-unit .l-unit-toolbar__col--right {
+    display: none !important;
+}
