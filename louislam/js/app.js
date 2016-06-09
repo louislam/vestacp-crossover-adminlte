@@ -15,7 +15,7 @@ var LouisAdminLTE = (function () {
         body.wrapInner('<div class="wrapper" />');
         wrapper = $(".wrapper");
         // Load Template
-        $.get("/adminlte/view/template.php", function (html) {
+        $.get("/louislam/view/template.php", function (html) {
             body.show();
             var template = $(html);
             var sidebar = template.find(".main-sidebar");
@@ -82,7 +82,7 @@ var LouisAdminLTE = (function () {
             // Add Box to Listing
             var contentSection = $('<section class="content"></section>');
             var row = $("<div class='row' />");
-            var col = $("<div class='col-xs-12 col-md-7' />");
+            var col = $("<div class='col-xs-12 col-lg-7' />");
             var box = $("<div class='box'><div class='box-header'></div><div class='box-body'></div><div class='box-footer'></div></div>");
             var units = $(".units");
             contentSection.html(row);
