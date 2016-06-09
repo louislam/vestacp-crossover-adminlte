@@ -16,3 +16,5 @@ $RECYCLE.BIN/
 
 # Mac crap
 .DS_Store
+
+/bower_components

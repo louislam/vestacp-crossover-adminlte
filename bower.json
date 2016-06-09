@@ -1,0 +1,20 @@
+{
+  "name": "vestacp-crossover-adminlte",
+  "homepage": "https://github.com/louislam/vestacp-crossover-adminlte",
+  "authors": [
+    "Louis Lam"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-material-design": "^0.5.10"
+  }
+}
