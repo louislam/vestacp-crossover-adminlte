@@ -9,7 +9,7 @@ var LouisAdminLTE = (function () {
     LouisAdminLTE.prototype.initUI = function () {
         var body = $("body");
         var wrapper;
-        body.addClass("skin-blue sidebar-mini");
+        body.addClass("skin-blue sidebar-mini fixed");
         // Wrap All Content first
         body.wrapInner('<div class="content-wrapper"></div>');
         body.wrapInner('<div class="wrapper" />');
@@ -32,7 +32,7 @@ var LouisAdminLTE = (function () {
                 var name = LouisAdminLTE.ucFirst($(this).find(".l-stat__col-title").text());
                 var url = $(this).find("a").attr("href");
                 var number = LouisAdminLTE.ucFirst($(this).find("ul li:first-child span").text());
-                var item = $("<li><a href=''><i class='fa'></i> <span></span><small class='label pull-right  bg-green'>new</small></li>");
+                var item = $("<li><a href=''><i class='fa'></i> <span></span><small class='label pull-right  bg-blue'></small></li>");
                 if ($(this).hasClass("l-stat__col--active")) {
                     item.addClass("active");
                     activeItem = item;
@@ -78,7 +78,6 @@ var LouisAdminLTE = (function () {
                     item.find(".fa").addClass("fa-circle-o");
                     a.find("span").append(name);
                 }
-                console.log($(this).parent());
                 if ($(this).parent().hasClass("l-menu__item--active")) {
                     item.addClass("active");
                     activeItem = item;
@@ -115,10 +114,22 @@ var LouisAdminLTE = (function () {
             //var actionPanel = $(this).find(".actions-panel");
             var actionButtons = $(this).find(".actions-panel__col");
             if (actionButtons.size() > 0) {
-                var btnGroup = $('<div class="btn-group action-btn-group"><button type="button" class="btn btn-default btn-flat">Action</button><button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown"> ' +
+                var btnGroup = $('<div class="btn-group action-btn-group"><button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown"> ' +
                     '<span class="caret"></span> <span class="sr-only">Toggle Dropdown</span> </button><ul class="dropdown-menu" role="menu"></ul></div>');
                 row.find(".right").append(btnGroup);
-                actionButtons.each(function () {
+                var dropdownMenuUL = btnGroup.find(".dropdown-menu");
+                actionButtons.each(function (i) {
+                    var oldA = $(this).find("a");
+                    if (i == 0) {
+                        oldA.addClass("btn-main-action btn btn-default btn-flat");
+                        btnGroup.prepend(oldA);
+                    }
+                    else {
+                        var li = $('<li></li>');
+                        li.append(oldA);
+                        console.log(li.html());
+                        dropdownMenuUL.append(li);
+                    }
                 });
             }
         });

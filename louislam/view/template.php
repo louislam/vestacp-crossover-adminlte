@@ -63,15 +63,4 @@
         </section>
     </aside>
 
-    <ul class="menu-item-template">
-        <li>
-            <a href="pages/widgets.html">
-                <i class="fa fa-th"></i> <span>Widgets</span>
-                <small class="label pull-right bg-green">new</small>
-            </a>
-        </li>
-
-    </ul>
-
-
 </div>
