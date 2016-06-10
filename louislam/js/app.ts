@@ -134,11 +134,15 @@ class LouisAdminLTE {
         // For each Row
         $(".units .l-unit").each(function () {
 
-            var row = $("<div class='row'><div class='col-xs-12 col-sm-8 left'></div><div class='col-xs-12 col-sm-4 right'></div></div>");
+            var row = $("<div class='row'><div class='col-xs-12 col-md-9 left'></div><div class='col-xs-12 col-md-3 right'></div></div>");
             row.find(".left").append($(this).find(".l-unit-toolbar"));
             row.find(".left").append($(this).find(".l-unit__col--left"));
             row.find(".left").append($(this).find(".l-unit__col--right"));
            $(this).append(row);
+
+            row.find(".l-unit__name").click(() => {
+                row.find(".l-unit__stats").toggle();
+            });
 
             // Action Panel
             //var actionPanel = $(this).find(".actions-panel");
