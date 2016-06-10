@@ -84,14 +84,9 @@ body {
 }
 .l-unit__stats table {
   width: 100%;
-  display: block;
-}
-.l-unit__stats table tr {
-  display: block;
 }
 .l-unit__stats table tr td {
   padding: 5px;
-  display: block;
 }
 .l-unit__stats table tr td .l-unit__stat-col--right {
   float: none;

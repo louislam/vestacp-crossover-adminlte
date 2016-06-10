@@ -110,8 +110,14 @@ var LouisAdminLTE = (function () {
             row.find(".left").append($(this).find(".l-unit__col--left"));
             row.find(".left").append($(this).find(".l-unit__col--right"));
             $(this).append(row);
+            var stats = row.find(".l-unit__stats");
             row.find(".l-unit__name").click(function () {
-                row.find(".l-unit__stats").toggle();
+                stats.toggle();
+            });
+            stats.find("td").each(function (i, e) {
+                if ($(e).text().trim() == "") {
+                    $(e).remove();
+                }
             });
             // Action Panel
             //var actionPanel = $(this).find(".actions-panel");
