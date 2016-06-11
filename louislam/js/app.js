@@ -5,11 +5,15 @@
 "use strict";
 var LouisAdminLTE = (function () {
     function LouisAdminLTE() {
+        this.body = $("body");
     }
     LouisAdminLTE.prototype.initUI = function () {
-        var body = $("body");
+        var _this = this;
+        var body = this.body;
         var wrapper;
-        body.addClass("skin-blue sidebar-mini");
+        body.addClass("sidebar-mini");
+        body.addClass(this.getSkin());
+        body.addClass(this.getLayoutBoxed());
         // Wrap All Content first
         body.wrapInner('<div class="content-wrapper"></div>');
         body.wrapInner('<div class="wrapper" />');
@@ -22,6 +26,7 @@ var LouisAdminLTE = (function () {
             var sidebarMenu = sidebar.find(".sidebar-menu");
             var header = template.find(".main-header");
             var activeItem = null;
+            var menuItem = $("<li><a href=''><i class='fa'></i> <span></span><small class='label pull-right  bg-blue'></small></li>");
             wrapper.prepend(header);
             wrapper.prepend(sidebar);
             header.find(".username").text($(".l-profile__username").text());
@@ -32,7 +37,7 @@ var LouisAdminLTE = (function () {
                 var name = LouisAdminLTE.ucFirst($(this).find(".l-stat__col-title").text());
                 var url = $(this).find("a").attr("href");
                 var number = LouisAdminLTE.ucFirst($(this).find("ul li:first-child span").text());
-                var item = $("<li><a href=''><i class='fa'></i> <span></span><small class='label pull-right  bg-blue'></small></li>");
+                var item = menuItem.clone();
                 if ($(this).hasClass("l-stat__col--active")) {
                     item.addClass("active");
                     activeItem = item;
@@ -59,6 +64,14 @@ var LouisAdminLTE = (function () {
                     item.find(".fa").addClass("fa-database");
                     item.find("span").text(name.replace("Db", "Database"));
                 }
+                else if (url == "/list/cron/") {
+                    item.find(".fa").addClass("fa-clock-o");
+                    item.find("span").text(name);
+                }
+                else if (url == "/list/backup/") {
+                    item.find(".fa").addClass("fa-ambulance");
+                    item.find("span").text(name);
+                }
                 else {
                     item.find(".fa").addClass("fa-th");
                     item.find("span").text(name);
@@ -66,7 +79,7 @@ var LouisAdminLTE = (function () {
                 sidebarMenu.append(item);
             });
             // Admin Menu
-            sidebarMenu.append('<li class="treeview admin-treeview"><a href="#"><i class="fa fa-files-o"></i><span>More</span></a><ul class="treeview-menu admin-menu"></ul></li>');
+            sidebarMenu.append('<li class="treeview admin-treeview"><a href="#"><i class="fa fa-th"></i><span>More</span></a><ul class="treeview-menu admin-menu"></ul></li>');
             $(".l-menu__item a").each(function () {
                 var item = $("<li><a><i class=\"fa\"></i><span></span></a></li>");
                 var a = item.find("a");
@@ -84,6 +97,22 @@ var LouisAdminLTE = (function () {
                     activeItem = item;
                 }
                 $(".admin-menu").append(item);
+            });
+            // AdminLTE Settings
+            var item = menuItem.clone();
+            item.find(".fa").addClass("fa-cog");
+            item.find("a").attr("href", "#").click(function () {
+                $('#modal-setting').modal('show');
+            });
+            item.find("span").text("AdminLTE Settings");
+            sidebarMenu.append(item);
+            var modal = template.find(".modal-setting");
+            $("body").append(modal);
+            modal.find(".skin-block").each(function (i, elem) {
+                var skinName = $(elem).data("skin");
+                $(elem).css("background-image", "url(/louislam/img/" + skinName + ".png)").click(function () {
+                    _this.setSkin(skinName);
+                });
             });
             $(".l-stat, .l-header").hide();
             $(".l-separator").remove();
@@ -121,6 +150,13 @@ var LouisAdminLTE = (function () {
             row.find(".left").append($(this).find(".l-unit__col--right"));
             $(this).append(row);
             var stats = row.find(".l-unit__stats");
+            // Firewall only
+            if (location.href.indexOf("/list/firewall/") >= 0) {
+                row.find(".l-unit__col.l-unit__col--right").prepend('<div class="l-unit__name separate">' + row.find(".l-unit__stats").text() + '</div>');
+                row.find(".l-icon-star").css("margin-top", 0);
+            }
+            else {
+            }
             row.find(".l-unit__name").click(function () {
                 stats.toggle();
             });
@@ -146,7 +182,6 @@ var LouisAdminLTE = (function () {
                     else {
                         var li = $('<li></li>');
                         li.append(oldA);
-                        console.log(li.html());
                         dropdownMenuUL.append(li);
                     }
                 });
@@ -158,6 +193,29 @@ var LouisAdminLTE = (function () {
     };
     LouisAdminLTE.ucFirst = function (str) {
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    };
+    LouisAdminLTE.prototype.setSkin = function (className) {
+        this.body.removeClass("skin-blue skin-blue-light skin-yellow skin-yellow-light skin-green skin-green-light skin-purple skin-purple-light skin-red skin-red-light skin-black skin-black-light");
+        localStorage.setItem("louislam-skin", className);
+        this.body.addClass(className);
+    };
+    LouisAdminLTE.prototype.getSkin = function () {
+        var skin = localStorage.getItem("louislam-skin");
+        if (skin == null) {
+            return "skin-blue";
+        }
+        return skin;
+    };
+    LouisAdminLTE.prototype.setLayoutBoxed = function (val) {
+        localStorage.setItem("louislam-layout-boxed", val.toString());
+        this.body.removeClass("layout-boxed").addClass(this.getLayoutBoxed());
+    };
+    LouisAdminLTE.prototype.getLayoutBoxed = function () {
+        var val = localStorage.getItem("louislam-layout-boxed");
+        if (val != null && val == "true") {
+            return "layout-boxed";
+        }
+        return "";
     };
     return LouisAdminLTE;
 }());

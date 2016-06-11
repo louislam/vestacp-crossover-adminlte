@@ -7,15 +7,19 @@
 
 class LouisAdminLTE {
 
+    protected body : JQuery = $("body");
+
     constructor() {
 
     }
 
     private initUI() {
-        var body = $("body");
+        var body = this.body;
         var wrapper;
 
-        body.addClass("skin-blue sidebar-mini");
+        body.addClass("sidebar-mini");
+        body.addClass(this.getSkin());
+        body.addClass(this.getLayoutBoxed());
 
         // Wrap All Content first
         body.wrapInner('<div class="content-wrapper"></div>');
@@ -24,13 +28,14 @@ class LouisAdminLTE {
         wrapper = $(".wrapper");
 
         // Load Template
-        $.get("/louislam/view/template.php", function (html) {
+        $.get("/louislam/view/template.php",  (html) => {
             body.show();
             var template = $(html);
             var sidebar = template.find(".main-sidebar");
             var sidebarMenu = sidebar.find(".sidebar-menu");
             var header = template.find(".main-header");
             var activeItem = null;
+            var menuItem = $("<li><a href=''><i class='fa'></i> <span></span><small class='label pull-right  bg-blue'></small></li>");
 
             wrapper.prepend(header);
             wrapper.prepend(sidebar);
@@ -45,7 +50,7 @@ class LouisAdminLTE {
                 var url = $(this).find("a").attr("href");
                 var number = LouisAdminLTE.ucFirst($(this).find("ul li:first-child span").text());
 
-                var item = $("<li><a href=''><i class='fa'></i> <span></span><small class='label pull-right  bg-blue'></small></li>");
+                var item = menuItem.clone();
 
                 if ($(this).hasClass("l-stat__col--active")) {
                     item.addClass("active");
@@ -70,6 +75,12 @@ class LouisAdminLTE {
                 } else if (url == "/list/db/") {
                     item.find(".fa").addClass("fa-database");
                     item.find("span").text(name.replace("Db", "Database"));
+                } else if (url == "/list/cron/") {
+                    item.find(".fa").addClass("fa-clock-o");
+                    item.find("span").text(name);
+                } else if (url == "/list/backup/") {
+                    item.find(".fa").addClass("fa-ambulance");
+                    item.find("span").text(name);
                 } else {
                     item.find(".fa").addClass("fa-th");
                     item.find("span").text(name);
@@ -80,8 +91,9 @@ class LouisAdminLTE {
                 sidebarMenu.append(item);
             });
 
+
             // Admin Menu
-            sidebarMenu.append('<li class="treeview admin-treeview"><a href="#"><i class="fa fa-files-o"></i><span>More</span></a><ul class="treeview-menu admin-menu"></ul></li>');
+            sidebarMenu.append('<li class="treeview admin-treeview"><a href="#"><i class="fa fa-th"></i><span>More</span></a><ul class="treeview-menu admin-menu"></ul></li>');
 
             $(".l-menu__item a").each(function () {
                 var item = $("<li><a><i class=\"fa\"></i><span></span></a></li>");
@@ -104,6 +116,25 @@ class LouisAdminLTE {
                 }
 
                 $(".admin-menu").append(item);
+            });
+
+            // AdminLTE Settings
+            var item = menuItem.clone();
+            item.find(".fa").addClass("fa-cog");
+            item.find("a").attr("href", "#").click(() => {
+                $('#modal-setting').modal('show');
+            });
+            item.find("span").text("AdminLTE Settings");
+            sidebarMenu.append(item);
+            var modal = template.find(".modal-setting");
+            $("body").append(modal);
+
+            modal.find(".skin-block").each((i, elem) => {
+                var skinName = $(elem).data("skin");
+                $(elem).css("background-image", "url(/louislam/img/"+ skinName +".png)").click(() => {
+
+                    this.setSkin(skinName);
+                });
             });
 
 
@@ -155,6 +186,15 @@ class LouisAdminLTE {
 
             var stats =   row.find(".l-unit__stats");
 
+
+            // Firewall only
+            if (location.href.indexOf("/list/firewall/") >= 0) {
+                row.find(".l-unit__col.l-unit__col--right").prepend('<div class="l-unit__name separate">' + row.find(".l-unit__stats").text() + '</div>');
+                row.find(".l-icon-star").css("margin-top", 0);
+            } else {
+
+            }
+
             row.find(".l-unit__name").click(() => {
                 stats.toggle();
             });
@@ -185,11 +225,11 @@ class LouisAdminLTE {
                     } else {
                         var li = $('<li></li>');
                         li.append(oldA);
-                        console.log(li.html());
                         dropdownMenuUL.append(li);
                     }
                 });
             }
+
 
 
 
@@ -205,6 +245,37 @@ class LouisAdminLTE {
 
     public static ucFirst(str : string) {
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }
+
+    public setSkin(className) {
+        this.body.removeClass("skin-blue skin-blue-light skin-yellow skin-yellow-light skin-green skin-green-light skin-purple skin-purple-light skin-red skin-red-light skin-black skin-black-light");
+        localStorage.setItem("louislam-skin", className);
+        this.body.addClass(className);
+    }
+
+    public getSkin() {
+        var skin = localStorage.getItem("louislam-skin");
+
+        if (skin == null) {
+            return "skin-blue";
+        }
+        return skin;
+    }
+
+    public setLayoutBoxed(val : boolean) {
+        localStorage.setItem("louislam-layout-boxed", val.toString());
+
+        this.body.removeClass("layout-boxed").addClass(this.getLayoutBoxed());
+    }
+
+    public getLayoutBoxed() {
+        var val = localStorage.getItem("louislam-layout-boxed");
+
+        if (val != null && val == "true") {
+            return "layout-boxed";
+        }
+
+        return "";
     }
 }
 

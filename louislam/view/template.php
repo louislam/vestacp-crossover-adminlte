@@ -63,4 +63,44 @@
         </section>
     </aside>
 
+    <div class="modal fade modal-setting" id="modal-setting"  tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">AdminLTE Settings</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Boxed Layout:</p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" onclick="louisAdminLTE.setLayoutBoxed(true)">Enable</button>
+                        <button type="button" class="btn btn-default" onclick="louisAdminLTE.setLayoutBoxed(false)">Disable</button>
+                    </div>
+<br /><br />
+                    <p>Skin:</p>
+                    <div class="skin-block" data-skin="skin-blue"></div>
+
+                    <div class="skin-block" data-skin="skin-yellow"></div>
+
+                    <div class="skin-block" data-skin="skin-green"></div>
+
+                    <div class="skin-block" data-skin="skin-purple"></div>
+
+                    <div class="skin-block" data-skin="skin-red"></div>
+                    <div class="skin-block" data-skin="skin-black"></div>
+                    <div class="skin-block" data-skin="skin-blue-light"></div>
+                    <div class="skin-block" data-skin="skin-yellow-light"></div>
+                    <div class="skin-block" data-skin="skin-green-light"></div>
+                    <div class="skin-block" data-skin="skin-purple-light"></div>
+                    <div class="skin-block" data-skin="skin-red-light"></div>
+
+                    <div class="skin-block" data-skin="skin-black-light"></div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </div>
