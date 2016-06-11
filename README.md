@@ -12,8 +12,9 @@
 
 
 ## Live Demo
-
-Not available now.
+https://demo.vestacp.louislam.net:8083
+Username: demo
+Password: vUiI6tQsV8
 
 ## Installation
 
