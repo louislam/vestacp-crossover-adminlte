@@ -1,9 +1,10 @@
 # VestaCP x AdminLTE
 
-## Description
+## Description ##
 
 - Integrate AdminLTE theme into VestaCP
-- 
+- 12 color schemes
+- Boxed layout
 
 ## Installation
 1. Backup /usr/local/vesta/web/.
@@ -23,6 +24,12 @@ https://forum.vestacp.com/viewtopic.php?f=10&t=7234&sid=f7d37b6d2d97e58dabc0c3cc
 - Inject the theme using Javascript instead of modifiying all html and files. 
 
 ## Preview
+
+### Youtube Video
+
+https://www.youtube.com/watch?v=noiE3eu6hiU
+
+### Screenshots
 
 ![Alt text](https://louislam.net/blog/wp-content/uploads/2015/03/n01692.png)
 ![Alt text](https://louislam.net/blog/wp-content/uploads/2015/03/n01695.png)
