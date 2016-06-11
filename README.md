@@ -1,5 +1,7 @@
 # VestaCP x AdminLTE
 
+![Alt text](https://louislam.net/blog/wp-content/uploads/2016/06/LOUISLAM-PC-000271.png)
+
 ## Description ##
 
 - Integrate AdminLTE theme into VestaCP
@@ -49,7 +51,7 @@ https://www.youtube.com/watch?v=noiE3eu6hiU
 
 ### Screenshots
 
-![Alt text](https://louislam.net/blog/wp-content/uploads/2015/03/n01692.png)
+
+![Alt text](https://louislam.net/blog/wp-content/uploads/2016/06/LOUISLAM-PC-000257.png)
 ![Alt text](https://louislam.net/blog/wp-content/uploads/2015/03/n01695.png)
-![Alt text](https://louislam.net/blog/wp-content/uploads/2015/03/n01694.png)
-![Alt text](https://louislam.net/blog/wp-content/uploads/2015/03/n01693.png)
+![Alt text](https://louislam.net/blog/wp-content/uploads/2016/06/379b3bc1-fbe7-47b9-9fcc-fd4cb12dd6bd.png)
