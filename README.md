@@ -12,8 +12,19 @@
 Not available now.
 
 ## Installation
-1. Backup /usr/local/vesta/web/.
-1. Put all files into /usr/local/vesta/web/.
+
+### (Option 1) For someone who don't know what is Bower:
+
+1. Go to "Download Page" (https://github.com/louislam/vestacp-crossover-adminlte/releases), click "build.zip";
+1. Backup "/usr/local/vesta/web/".
+1. Unzip "build.zip" and put all files into "/usr/local/vesta/web/".
+
+### (Option 2) For someone who know what is Bower:
+
+1. Download the Source Code.
+1. Backup "/usr/local/vesta/web/".
+1. Unzip and put all files into "/usr/local/vesta/web/"
+1. Execute "bower install" command
 
 ## Reference
 In case you forgot to backup the "web" directory, you can download it from the VestaCP official repo.
