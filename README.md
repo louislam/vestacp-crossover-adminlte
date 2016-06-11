@@ -6,6 +6,8 @@
 - 12 color schemes
 - Boxed layout
 
+(Paid features such as File Manager is not tested)
+
 
 ## Live Demo
 
