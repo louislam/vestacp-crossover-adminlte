@@ -6,6 +6,11 @@
 - 12 color schemes
 - Boxed layout
 
+
+## Live Demo
+
+Not available now.
+
 ## Installation
 1. Backup /usr/local/vesta/web/.
 1. Put all files into /usr/local/vesta/web/.
