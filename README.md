@@ -6,7 +6,7 @@
 - 12 color schemes
 - Boxed layout
 
-(Paid features such as File Manager is not tested)
+(VestaCP's paid features such as File Manager is not tested)
 
 
 ## Live Demo
