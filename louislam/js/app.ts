@@ -131,6 +131,13 @@ class LouisAdminLTE {
             $(".l-icon-shortcuts, .l-icon-to-top, .l-unit__stats, .l-unit__date, .l-sort-toolbar__search-box").hide();
         });
 
+        // Create Button re-style
+        var createButton = $(".l-sort__create-btn");
+        createButton.removeClass("l-sort__create-btn").addClass("btn btn-info btn-flat");
+        createButton.text(createButton.attr('title'));
+        createButton.css("margin-left", "15px");
+        $(".l-sort-toolbar").prepend(createButton);
+
         // For each Row
         $(".units .l-unit").each(function () {
 
