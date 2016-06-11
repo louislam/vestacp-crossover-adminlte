@@ -66,7 +66,7 @@ var LouisAdminLTE = (function () {
                 sidebarMenu.append(item);
             });
             // Admin Menu
-            sidebarMenu.append('<li class="treeview"><a href="#"><i class="fa fa-files-o"></i><span>Admin</span></a><ul class="treeview-menu admin-menu"></ul></li>');
+            sidebarMenu.append('<li class="treeview admin-treeview"><a href="#"><i class="fa fa-files-o"></i><span>More</span></a><ul class="treeview-menu admin-menu"></ul></li>');
             $(".l-menu__item a").each(function () {
                 var item = $("<li><a><i class=\"fa\"></i><span></span></a></li>");
                 var a = item.find("a");
@@ -80,6 +80,7 @@ var LouisAdminLTE = (function () {
                 }
                 if ($(this).parent().hasClass("l-menu__item--active")) {
                     item.addClass("active");
+                    $(".admin-treeview").addClass("active");
                     activeItem = item;
                 }
                 $(".admin-menu").append(item);
