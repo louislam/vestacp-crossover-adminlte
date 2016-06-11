@@ -98,3 +98,13 @@ body {
 .l-unit__col.l-unit__col--right {
   width: 100%;
 }
+.title b,
+.title {
+  color: #0a3152;
+  font-size: 14px;
+  font-weight: normal;
+  text-align: left;
+  padding: 0 15px;
+  line-height: 30px;
+  text-transform: none;
+}

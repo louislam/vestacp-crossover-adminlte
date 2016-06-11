@@ -9,7 +9,7 @@ var LouisAdminLTE = (function () {
     LouisAdminLTE.prototype.initUI = function () {
         var body = $("body");
         var wrapper;
-        body.addClass("skin-blue sidebar-mini fixed");
+        body.addClass("skin-blue sidebar-mini");
         // Wrap All Content first
         body.wrapInner('<div class="content-wrapper"></div>');
         body.wrapInner('<div class="wrapper" />');
@@ -94,6 +94,9 @@ var LouisAdminLTE = (function () {
             var col = $("<div class='col-xs-12 col-lg-11' />");
             var box = $("<div class='box-list box-info box'><div class='box-header with-border'></div><div class='box-body'></div><div class='box-footer'></div></div>");
             var units = $(".units");
+            if (units.size() == 0) {
+                units = $('#vstobjects');
+            }
             contentSection.html(row);
             row.html(col);
             col.html(box);
@@ -149,6 +152,9 @@ var LouisAdminLTE = (function () {
                 });
             }
         });
+        // Add or edit
+        $(".data-col1").parent().remove();
+        // $(".data-col2 input").addClass("form-control");
     };
     LouisAdminLTE.ucFirst = function (str) {
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
