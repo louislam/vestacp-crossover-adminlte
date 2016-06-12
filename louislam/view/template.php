@@ -3,7 +3,7 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="/" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>V</b>CP</span>
             <!-- logo for regular state and mobile devices -->
@@ -79,13 +79,9 @@
 <br /><br />
                     <p>Skin:</p>
                     <div class="skin-block" data-skin="skin-blue"></div>
-
                     <div class="skin-block" data-skin="skin-yellow"></div>
-
                     <div class="skin-block" data-skin="skin-green"></div>
-
                     <div class="skin-block" data-skin="skin-purple"></div>
-
                     <div class="skin-block" data-skin="skin-red"></div>
                     <div class="skin-block" data-skin="skin-black"></div>
                     <div class="skin-block" data-skin="skin-blue-light"></div>
@@ -93,10 +89,7 @@
                     <div class="skin-block" data-skin="skin-green-light"></div>
                     <div class="skin-block" data-skin="skin-purple-light"></div>
                     <div class="skin-block" data-skin="skin-red-light"></div>
-
                     <div class="skin-block" data-skin="skin-black-light"></div>
-
-
                 </div>
 
             </div>
