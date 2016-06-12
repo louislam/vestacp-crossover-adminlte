@@ -7,10 +7,23 @@ var LouisAdminLTE = (function () {
     function LouisAdminLTE() {
         this.body = $("body");
     }
+    LouisAdminLTE.prototype.check = function () {
+        if ($(".l-stat .l-stat__col").size() > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
     LouisAdminLTE.prototype.initUI = function () {
         var _this = this;
         var body = this.body;
         var wrapper;
+        if (!this.check()) {
+            alert("Cannot apply the theme. Please restore the \"templates/header.html\" and check if you are using VestaCP 0.9.8 (Release 15).");
+            body.show();
+            return;
+        }
         body.addClass("sidebar-mini");
         body.addClass(this.getSkin());
         body.addClass(this.getLayoutBoxed());

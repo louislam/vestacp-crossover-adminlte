@@ -13,9 +13,25 @@ class LouisAdminLTE {
 
     }
 
+    public check() : boolean {
+        if ($(".l-stat .l-stat__col").size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private initUI() {
+
         var body = this.body;
         var wrapper;
+
+        if (! this.check()) {
+            alert("Cannot apply the theme. Please restore the \"templates/header.html\" and check if you are using VestaCP 0.9.8 (Release 15)."); 
+            body.show();
+            return;
+        }
+
 
         body.addClass("sidebar-mini");
         body.addClass(this.getSkin());
@@ -29,6 +45,10 @@ class LouisAdminLTE {
 
         // Load Template
         $.get("/louislam/view/template.php",  (html) => {
+
+
+
+
             body.show();
             var template = $(html);
             var sidebar = template.find(".main-sidebar");
