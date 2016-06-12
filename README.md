@@ -20,6 +20,10 @@ Password: vUiI6tQsV8
 
 ## Installation
 
+### Before you go
+1. Tested on Version: 0.9.8 (Release: 15) ONLY
+2. Make sure make a backup.
+
 ### (Option 1) For someone who don't know what is Bower:
 
 1. Go to "Download Page" (https://github.com/louislam/vestacp-crossover-adminlte/releases), click "build.zip";
