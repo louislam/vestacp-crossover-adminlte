@@ -22,7 +22,7 @@ Password: vUiI6tQsV8
 
 ### Before you go
 1. Tested on Version: 0.9.8 (Release: 15) ONLY
-2. Make sure make a backup.
+2. Make sure to make a backup.
 
 ### (Option 1) For someone who don't know what is Bower:
 
