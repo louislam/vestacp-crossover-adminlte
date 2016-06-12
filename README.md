@@ -48,7 +48,7 @@ https://forum.vestacp.com/viewtopic.php?f=10&t=7234&sid=f7d37b6d2d97e58dabc0c3cc
 
 ## Further Info
 
-- Inject the theme using Javascript instead of modifiying all html and files. 
+- Inject the theme using Javascript instead of modifying all html and files.
 
 ## Preview
 
