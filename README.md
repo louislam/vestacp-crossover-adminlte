@@ -1,17 +1,28 @@
 # VestaCP x AdminLTE
 
+![Alt text](https://louislam.net/blog/wp-content/uploads/2016/06/LOUISLAM-PC-000271.png)
+
 ## Description ##
 
 - Integrate AdminLTE theme into VestaCP
 - 12 color schemes
 - Boxed layout
 
+(VestaCP's paid features such as File Manager is not tested)
+
 
 ## Live Demo
+https://demo.vestacp.louislam.net:8083
 
-Not available now.
+Username: demo
+
+Password: vUiI6tQsV8
 
 ## Installation
+
+### Before you go
+1. Tested on Version: 0.9.8 (Release: 15) ONLY
+2. Make sure make a backup.
 
 ### (Option 1) For someone who don't know what is Bower:
 
@@ -47,7 +58,7 @@ https://www.youtube.com/watch?v=noiE3eu6hiU
 
 ### Screenshots
 
-![Alt text](https://louislam.net/blog/wp-content/uploads/2015/03/n01692.png)
+
+![Alt text](https://louislam.net/blog/wp-content/uploads/2016/06/LOUISLAM-PC-000257.png)
 ![Alt text](https://louislam.net/blog/wp-content/uploads/2015/03/n01695.png)
-![Alt text](https://louislam.net/blog/wp-content/uploads/2015/03/n01694.png)
-![Alt text](https://louislam.net/blog/wp-content/uploads/2015/03/n01693.png)
+![Alt text](https://louislam.net/blog/wp-content/uploads/2016/06/379b3bc1-fbe7-47b9-9fcc-fd4cb12dd6bd.png)
