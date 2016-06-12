@@ -114,3 +114,37 @@ body {
 .modal {
   background-color: transparent;
 }
+.ui-dialog {
+  border-radius: 0px;
+  top: 27% !important;
+  left: 50% !important;
+  margin-left: -150px;
+  background-color: #fff;
+  border-color: #EEE;
+  color: #222;
+}
+.ui-dialog .ui-button span {
+  color: #fff;
+  text-transform: uppercase;
+}
+.ui-widget-content {
+  border: 1px solid #aaaaaa;
+  color: #222;
+}
+.ui-dialog .ui-dialog-title {
+  float: left;
+  margin: .10pt 16px .10pt 0;
+  font-family: Arial;
+  color: #133d5f;
+  font-size: 15px;
+  letter-spacing: 0px;
+  text-transform: capitalize;
+  font-weight: normal;
+}
+.ui-dialog .ui-dialog-buttonpane {
+  border-color: #dedede;
+  border-style: solid none none;
+  text-align: left;
+  margin: .5em 0 0 0;
+  padding: 6px 0 1px 1px;
+}
