@@ -46,9 +46,6 @@ class LouisAdminLTE {
         // Load Template
         $.get("/louislam/view/template.php",  (html) => {
 
-
-
-
             body.show();
             var template = $(html);
             var sidebar = template.find(".main-sidebar");
@@ -226,7 +223,6 @@ class LouisAdminLTE {
             });
 
             // Action Panel
-            //var actionPanel = $(this).find(".actions-panel");
             var actionButtons = $(this).find(".actions-panel__col");
 
             if (actionButtons.size() > 0) {
@@ -238,6 +234,25 @@ class LouisAdminLTE {
 
                 actionButtons.each(function (i) {
                     var oldA = $(this).find("a");
+                    var inputURL = oldA.find("input[type=hidden]");
+
+                    // If the action has confirmation dialog, add it back using sweetalert.
+                    if (inputURL.size() > 0) {
+                        oldA.click(function () {
+                            swal({
+                                title: "Are you sure?",
+                                text: oldA.find(".confirmation").text(),
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "Yes",
+                                closeOnConfirm: false
+                            }, function () {
+                                location.href = inputURL.val(); 
+                            });
+                        });
+                    }
+
                     if (i == 0) {
                         oldA.addClass("btn-main-action btn btn-default btn-flat");
                         btnGroup.prepend(oldA);

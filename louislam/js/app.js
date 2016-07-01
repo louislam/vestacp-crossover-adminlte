@@ -179,7 +179,6 @@ var LouisAdminLTE = (function () {
                 }
             });
             // Action Panel
-            //var actionPanel = $(this).find(".actions-panel");
             var actionButtons = $(this).find(".actions-panel__col");
             if (actionButtons.size() > 0) {
                 var btnGroup = $('<div class="btn-group action-btn-group"><button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown"> ' +
@@ -188,6 +187,23 @@ var LouisAdminLTE = (function () {
                 var dropdownMenuUL = btnGroup.find(".dropdown-menu");
                 actionButtons.each(function (i) {
                     var oldA = $(this).find("a");
+                    var inputURL = oldA.find("input[type=hidden]");
+                    // If the action has confirmation dialog, add it back using sweetalert.
+                    if (inputURL.size() > 0) {
+                        oldA.click(function () {
+                            swal({
+                                title: "Are you sure?",
+                                text: oldA.find(".confirmation").text(),
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "Yes",
+                                closeOnConfirm: false
+                            }, function () {
+                                location.href = inputURL.val();
+                            });
+                        });
+                    }
                     if (i == 0) {
                         oldA.addClass("btn-main-action btn btn-default btn-flat");
                         btnGroup.prepend(oldA);

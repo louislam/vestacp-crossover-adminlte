@@ -282,3 +282,7 @@ body {
   cursor: pointer;
   border: 4px solid #EEE;
 }
+.action-btn-group a,
+.action-btn-group li {
+  cursor: pointer;
+}
