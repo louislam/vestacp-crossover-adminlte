@@ -4,6 +4,18 @@
 /// <reference path="jquery.d.ts" />
 "use strict";
 
+// Override the jQuery Attr function to fix the checkbox checking which the method is no longer working in newer jQuery.
+// #8 https://github.com/louislam/vestacp-crossover-adminlte/issues/8
+var oldAttr = $.fn.attr;
+$.fn.attr = function(name, value) {
+    if (name === "checked") {
+        return this.is(":checked");
+    } else {
+        return oldAttr.apply(this, arguments);
+    }
+};
+
+
 
 class LouisAdminLTE {
 

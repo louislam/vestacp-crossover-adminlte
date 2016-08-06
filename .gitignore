@@ -18,3 +18,4 @@ $RECYCLE.BIN/
 .DS_Store
 
 /bower_components
+/js
