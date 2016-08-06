@@ -8,14 +8,13 @@
 - 12 color schemes
 - Boxed layout
 
-(VestaCP's paid features such as File Manager is not tested)
-
 
 ## Installation
 
 ### Before you go
-1. Tested on Version: 0.9.8 (Release: 15) ONLY
-2. Make sure to make a backup.
+1. Currently, I tested on Version: 0.9.8 (Release: 15) ONLY. Please check you version first.
+1. VestaCP's paid features such as File Manager is not tested.
+1. Make sure to make a backup.
 
 ### (Option 1) For someone who don't know what is Bower:
 
