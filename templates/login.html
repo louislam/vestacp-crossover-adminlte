@@ -43,6 +43,7 @@
   <div class="login-box-body">
     <p class="login-box-msg"><?php if (isset($ERROR)) echo $ERROR ?></p>
     <form action="/login/" method="post">
+      <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
       <div class="form-group has-feedback">
         <input type="text" name="user" class="form-control" placeholder="<?php print __('Username');?>"/>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
