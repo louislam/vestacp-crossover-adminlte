@@ -139,7 +139,7 @@ body {
 }
 .ui-dialog .ui-dialog-title {
   float: left;
-  margin: .10pt 16px .10pt 0;
+  margin: 0.1pt 16px 0.1pt 0;
   font-family: Arial;
   color: #133d5f;
   font-size: 15px;
@@ -151,7 +151,7 @@ body {
   border-color: #dedede;
   border-style: solid none none;
   text-align: left;
-  margin: .5em 0 0 0;
+  margin: 0.5em 0 0 0;
   padding: 6px 0 1px 1px;
 }
 .vst-ok {
@@ -285,4 +285,21 @@ body {
 .action-btn-group a,
 .action-btn-group li {
   cursor: pointer;
+}
+.vst-error {
+  height: 26px;
+}
+.helper-container {
+  float: left;
+  height: auto;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-top: 3px;
+  width: 100%;
+}
+.l-unit__stat-col--left.wide-4 {
+  overflow: hidden;
+}
+.l-unit__stats img {
+  max-width: 60vw;
 }

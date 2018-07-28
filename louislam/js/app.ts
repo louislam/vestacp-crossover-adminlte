@@ -194,7 +194,9 @@ class LouisAdminLTE {
             box.find(".box-body").html(units);
             box.find(".box-footer").html($(".data-count"));
 
-            $(".l-icon-shortcuts, .l-icon-to-top, .l-unit__stats, .l-unit__date, .l-sort-toolbar__search-box").hide();
+            if (location.href.indexOf("/dns/?domain") < 0 && location.href.indexOf("/list/rrd/") < 0) {
+                $(".l-icon-shortcuts, .l-icon-to-top, .l-unit__stats, .l-unit__date, .l-sort-toolbar__search-box").hide();
+            }
         });
 
         // Create Button re-style

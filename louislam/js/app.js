@@ -14,7 +14,7 @@ $.fn.attr = function (name, value) {
         return oldAttr.apply(this, arguments);
     }
 };
-var LouisAdminLTE = (function () {
+var LouisAdminLTE = /** @class */ (function () {
     function LouisAdminLTE() {
         this.body = $("body");
     }
@@ -158,7 +158,9 @@ var LouisAdminLTE = (function () {
             units.before(contentSection);
             box.find(".box-body").html(units);
             box.find(".box-footer").html($(".data-count"));
-            $(".l-icon-shortcuts, .l-icon-to-top, .l-unit__stats, .l-unit__date, .l-sort-toolbar__search-box").hide();
+            if (location.href.indexOf("/dns/?domain") < 0 && location.href.indexOf("/list/rrd/") < 0) {
+                $(".l-icon-shortcuts, .l-icon-to-top, .l-unit__stats, .l-unit__date, .l-sort-toolbar__search-box").hide();
+            }
         });
         // Create Button re-style
         var createButton = $(".l-sort__create-btn");
